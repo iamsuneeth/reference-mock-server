@@ -12,9 +12,9 @@
     "start": "node index.js",
     "eslint": "node ./node_modules/eslint/bin/eslint.js .",
     "checks": "npm run eslint && npm test ",
-    "test": "DEBUG=error mocha",
-    "test:watch": "DEBUG=error mocha --watch",
-    "test:debug": "node --inspect node_modules/mocha/bin/_mocha --watch --no-timeouts"
+    "test": "DEBUG=error mocha --recursive",
+    "test:watch": "DEBUG=error mocha --watch --recursive",
+    "test:debug": "node --inspect node_modules/mocha/bin/_mocha --watch --no-timeouts --recursive"
   },
   "keywords": [],
   "license": "MIT",

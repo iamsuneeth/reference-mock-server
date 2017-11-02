@@ -37,6 +37,8 @@ DEBUG=error,log \
   VERSION=v1.1 \
   SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/account-info-1-1-0-swagger.json \
   PORT=8001 \
+  OPENID_CONFIG_ENDPOINT_URL=http://localhost:$PORT/openid/config \
+  OPENID_ASPSP_AUTH_HOST=http://localhost:$PORT \
   npm start
 # running on localhost:8001 ...
 ```
@@ -45,7 +47,7 @@ Set debug log levels using `DEBUG` env var.
 Set API URI version number using `VERSION` env var.
 Set API specification file using `SWAGGER` env var.
 
-## Mock data
+## ASPSP resource server mock data
 
 Currently mock data is read off the file system.
 
@@ -104,6 +106,10 @@ heroku config:set DEBUG=error,log
 heroku config:set SWAGGER=swagger-uri
 
 heroku config:set VERSION=<version-for-api-uri>
+
+heroku config:set OPENID_CONFIG_ENDPOINT_URL=https://<heroku-host-domain>/openid/config
+
+heroku config:set OPENID_ASPSP_AUTH_HOST=https://<heroku-host-domain>
 
 git push heroku master
 ```

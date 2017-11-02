@@ -10,14 +10,14 @@ describe('/openid/config/:id', () => {
   let server;
 
   before(() => {
-    oid = proxyquire('../lib/open-id-config.js', {
+    oid = proxyquire('../../lib/aspsp-open-id-config', {
       'env-var': env.mock({
         OPENID_ASPSP_AUTH_HOST: host,
       }),
     });
 
-    server = proxyquire('../lib/app.js', {
-      './open-id-config': oid,
+    server = proxyquire('../../lib/app.js', {
+      './aspsp-open-id-config': oid,
     });
   });
 

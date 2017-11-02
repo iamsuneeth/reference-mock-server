@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: off */
 const assert = require('assert');
 const sinon = require('sinon');
-const swagger = require('../lib/swagger.js');
+const swagger = require('../../lib/aspsp-resource-server/swagger');
 const fs = require('fs');
 
 const sandbox = sinon.createSandbox();

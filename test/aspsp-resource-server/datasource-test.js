@@ -1,5 +1,5 @@
 const assert = require('assert');
-const dataSource = require('../lib/datasource.js');
+const dataSource = require('../../lib/aspsp-resource-server/datasource');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { accountRequestHelper } = require('../lib/account-requests/account-request.js');
+const { accountRequestHelper } = require('../../lib/aspsp-authorisation-server/account-request.js');
 // const log = require('debug')('log');
 
 describe('Account Request', () => {

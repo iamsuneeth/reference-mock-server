@@ -6,18 +6,23 @@ const env = require('env-var');
 const openIdConfigUrl = 'http://localhost/openid/config';
 
 describe('/scim/v2/OBAccountPaymentServiceProviders', () => {
-  let apspsServer;
+  let aspspsEndpoint;
+  let directoryServer;
   let server;
 
   before(() => {
-    apspsServer = proxyquire('../lib/ob-directory.js', {
+    aspspsEndpoint = proxyquire('../../lib/ob-directory/aspsps', {
       'env-var': env.mock({
         OPENID_CONFIG_ENDPOINT_URL: openIdConfigUrl,
       }),
     });
 
-    server = proxyquire('../lib/app.js', {
-      './ob-directory.js': apspsServer,
+    directoryServer = proxyquire('../../lib/ob-directory', {
+      './aspsps': aspspsEndpoint,
+    });
+
+    server = proxyquire('../../lib/app.js', {
+      './ob-directory': directoryServer,
     });
   });
 
