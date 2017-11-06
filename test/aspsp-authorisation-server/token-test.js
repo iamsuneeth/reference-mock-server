@@ -25,7 +25,7 @@ describe('createToken', () => {
       grant_type: 'client_credentials',
     };
     return request(app)
-      .post('/token')
+      .post('/abc/token')
       .set('Accept', 'application/json')
       .set('authorization', authCredentials)
       .set('content-type', 'application/x-www-form-urlencoded')
