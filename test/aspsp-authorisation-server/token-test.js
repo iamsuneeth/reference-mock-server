@@ -69,4 +69,16 @@ describe('createToken', () => {
     assert.ok(res.headers['content-type']);
     assert.equal(res.headers['content-type'], 'application/json; charset=utf-8');
   });
+
+  it('sets no-store in Cache-Control header', async () => {
+    const res = await requestToken(validCredentials);
+    assert.ok(res.headers['cache-control']);
+    assert.equal(res.headers['cache-control'], 'no-store');
+  });
+
+  it('sets no-store in Pragma header', async () => {
+    const res = await requestToken(validCredentials);
+    assert.ok(res.headers.pragma);
+    assert.equal(res.headers.pragma, 'no-store');
+  });
 });
