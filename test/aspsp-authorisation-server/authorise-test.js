@@ -1,14 +1,30 @@
 const assert = require('assert');
 const request = require('supertest'); // eslint-disable-line
 const proxyquire = require('proxyquire');
+const env = require('env-var');
 
 describe('/authorize endpoint test', () => {
   let server;
+  let authorisationService;
+  let authoriseEndpoint;
   const state = '123456';
   const aspspCallbackRedirectionUrl = 'http://example.com/aaa-bank-url';
+  const authorsationCode = 'ABCD123456789';
 
   before(() => {
-    server = proxyquire('../../lib/app.js', {});
+    authoriseEndpoint = proxyquire('../../lib/aspsp-authorisation-server/authorise', {
+      'env-var': env.mock({
+        AUTHORISATION_CODE: authorsationCode,
+      }),
+    });
+
+    authorisationService = proxyquire('../../lib/aspsp-authorisation-server', {
+      './authorise': authoriseEndpoint,
+    });
+
+    server = proxyquire('../../lib/app.js', {
+      './aspsp-authorisation-server': authorisationService,
+    });
   });
 
   it('request authorisation code and validate other redirection params (all optional parameters provided)', (done) => {
@@ -20,7 +36,7 @@ describe('/authorize endpoint test', () => {
         const { location } = res.header;
         assert.ok(location);
         assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(location.includes('?authorization-code'));
+        assert.ok(location.includes(`authorization-code=${authorsationCode}`));
         assert.ok(location.includes(`state=${state}`));
         done();
       });
