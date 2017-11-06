@@ -63,4 +63,10 @@ describe('createToken', () => {
       token_type: 'bearer',
     });
   });
+
+  it('sets Content-Type to application/json;charset=UTF-8', async () => {
+    const res = await requestToken(validCredentials);
+    assert.ok(res.headers['content-type']);
+    assert.equal(res.headers['content-type'], 'application/json; charset=utf-8');
+  });
 });
