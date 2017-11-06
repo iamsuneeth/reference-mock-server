@@ -35,10 +35,13 @@ describe('createToken', () => {
       .send(body);
   };
 
-  it('returns 401 when credentials invalid', async () => {
+  it('returns 400 when credentials invalid', async () => {
     const invalidCredentials = credentials('bad-id', 'bad-secret');
     const res = await requestToken(invalidCredentials);
-    assert.equal(res.status, 401);
+    assert.equal(res.status, 400);
+    assert.deepEqual(res.body, {
+      error: 'invalid_grant',
+    });
   });
 
   it('returns 400 when credentials not send', async () => {
