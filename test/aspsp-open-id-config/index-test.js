@@ -22,14 +22,15 @@ describe('/openid/config/:id', () => {
   });
 
   it('returns JSON payload', (done) => {
+    const apspsId = 'test-bank';
     request(server.app)
-      .get('/openid/config/aaa-example-bank')
+      .get(`/openid/config/${apspsId}`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         const oidConfig = res.body;
         assert.equal(res.status, 200);
-        assert.equal(oidConfig.authorization_endpoint, `${host}/authorize`);
-        assert.equal(oidConfig.token_endpoint, `${host}/token`);
+        assert.equal(oidConfig.authorization_endpoint, `${host}/${apspsId}/authorize`);
+        assert.equal(oidConfig.token_endpoint, `${host}/${apspsId}/token`);
         done();
       });
   });
