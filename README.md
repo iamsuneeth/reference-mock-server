@@ -114,8 +114,18 @@ heroku config:set OPENID_ASPSP_AUTH_HOST=https://<heroku-host-domain>
 git push heroku master
 ```
 
-To test:
+To test (basic):
+```sh
+curl https://<newname>.herokuapp.com/health
 
+# OK
+
+# Or if using [httpie](https://httpie.org/), e.g. brew install httpie
+http --json https://<newname>.herokuapp.com/health
+
+```
+
+To test (advanced):
 ```sh
 curl -H "x-fapi-financial-id: abcbank" \
      -H "Authorization: alice" \
