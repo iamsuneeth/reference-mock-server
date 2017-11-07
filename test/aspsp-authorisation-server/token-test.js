@@ -24,10 +24,13 @@ describe('createToken', () => {
       scope: 'accounts',
       grant_type: 'client_credentials',
     };
-    return request(app)
+    let requestObj = request(app)
       .post('/token')
-      .set('Accept', 'application/json')
-      .set('authorization', authCredentials)
+      .set('Accept', 'application/json');
+    if (authCredentials) {
+      requestObj = requestObj.set('authorization', authCredentials);
+    }
+    return requestObj
       .set('content-type', 'application/x-www-form-urlencoded')
       .send(body);
   };
@@ -36,21 +39,37 @@ describe('createToken', () => {
     const invalidCredentials = credentials('bad-id', 'bad-secret');
     const res = await requestToken(invalidCredentials);
     assert.equal(res.status, 401);
+    assert.equal(res.headers['www-authenticate'], 'client_credentials');
+    assert.deepEqual(res.body, {
+      error: 'invalid_client',
+    });
   });
 
-  it('returns 401 when credentials blank', async () => {
+  it('returns 400 when credentials not send', async () => {
     const res = await requestToken(null);
-    assert.equal(res.status, 401);
+    assert.equal(res.status, 400);
+    assert.deepEqual(res.body, {
+      error: 'invalid_client',
+      error_description: 'authorization missing from request headers',
+    });
   });
 
   it('returns 400 when grant_type missing', async () => {
     const res = await requestToken(validCredentials, { scope: 'accounts' });
     assert.equal(res.status, 400);
+    assert.deepEqual(res.body, {
+      error: 'invalid_request',
+      error_description: 'grant_type missing from request body',
+    });
   });
 
   it('returns 400 when scope missing', async () => {
     const res = await requestToken(validCredentials, { grant_type: 'client_credentials' });
     assert.equal(res.status, 400);
+    assert.deepEqual(res.body, {
+      error: 'invalid_request',
+      error_description: 'scope missing from request body',
+    });
   });
 
   it('returns access token payload when credentials valid', async () => {
@@ -62,5 +81,23 @@ describe('createToken', () => {
       scope: 'accounts',
       token_type: 'bearer',
     });
+  });
+
+  it('sets Content-Type to application/json;charset=UTF-8', async () => {
+    const res = await requestToken(validCredentials);
+    assert.ok(res.headers['content-type']);
+    assert.equal(res.headers['content-type'], 'application/json; charset=utf-8');
+  });
+
+  it('sets no-store in Cache-Control header', async () => {
+    const res = await requestToken(validCredentials);
+    assert.ok(res.headers['cache-control']);
+    assert.equal(res.headers['cache-control'], 'no-store');
+  });
+
+  it('sets no-store in Pragma header', async () => {
+    const res = await requestToken(validCredentials);
+    assert.ok(res.headers.pragma);
+    assert.equal(res.headers.pragma, 'no-store');
   });
 });
