@@ -121,7 +121,7 @@ curl https://<newname>.herokuapp.com/health
 # OK
 
 # Or if using [httpie](https://httpie.org/), e.g. brew install httpie
-http --json https://<newname>.herokuapp.com/healts
+http --json https://<newname>.herokuapp.com/health
 
 ```
 
