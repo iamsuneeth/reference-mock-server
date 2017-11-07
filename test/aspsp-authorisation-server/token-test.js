@@ -35,12 +35,13 @@ describe('createToken', () => {
       .send(body);
   };
 
-  it('returns 400 when credentials invalid', async () => {
+  it('returns 401 when credentials invalid', async () => {
     const invalidCredentials = credentials('bad-id', 'bad-secret');
     const res = await requestToken(invalidCredentials);
-    assert.equal(res.status, 400);
+    assert.equal(res.status, 401);
+    assert.equal(res.headers['www-authenticate'], 'client_credentials');
     assert.deepEqual(res.body, {
-      error: 'invalid_grant',
+      error: 'invalid_client',
     });
   });
 
