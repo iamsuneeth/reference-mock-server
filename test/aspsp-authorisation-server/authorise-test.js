@@ -36,7 +36,7 @@ describe('/authorize endpoint test', () => {
         const { location } = res.header;
         assert.ok(location);
         assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(location.includes(`authorization-code=${authorsationCode}`));
+        assert.ok(location.includes(`code=${authorsationCode}`));
         assert.ok(location.includes(`state=${state}`));
         done();
       });
@@ -51,7 +51,7 @@ describe('/authorize endpoint test', () => {
         const { location } = res.header;
         assert.ok(location);
         assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(location.includes('?authorization-code'));
+        assert.ok(location.includes('?code'));
         assert.ok(!location.includes('state'));
         done();
       });
@@ -84,7 +84,7 @@ describe('/authorize endpoint test', () => {
         const { location } = res.header;
         assert.ok(location);
         assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('authorization-code'));
+        assert.ok(!location.includes('code'));
         assert.ok(location.includes(`state=${state}`));
         assert.ok(location.includes('error=invalid_request'));
         done();
@@ -99,7 +99,7 @@ describe('/authorize endpoint test', () => {
         const { location } = res.header;
         assert.ok(location);
         assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('authorization-code'));
+        assert.ok(!location.includes('code'));
         assert.ok(!location.includes('state'));
         assert.ok(location.includes('error=invalid_request'));
         done();
@@ -114,7 +114,7 @@ describe('/authorize endpoint test', () => {
         const { location } = res.header;
         assert.ok(location);
         assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('authorization-code'));
+        assert.ok(!location.includes('code'));
         assert.ok(location.includes(`state=${state}`));
         assert.ok(location.includes('error=unsupported_response_type'));
         done();
@@ -129,7 +129,7 @@ describe('/authorize endpoint test', () => {
         const { location } = res.header;
         assert.ok(location);
         assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('authorization-code'));
+        assert.ok(!location.includes('code'));
         assert.ok(location.includes(`state=${state}`));
         assert.ok(location.includes('error=invalid_scope'));
         done();
