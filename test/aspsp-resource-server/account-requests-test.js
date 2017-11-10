@@ -1,6 +1,5 @@
 const assert = require('assert');
-const { accountRequestHelper } = require('../../lib/aspsp-authorisation-server/account-request.js');
-// const log = require('debug')('log');
+const { accountRequestHelper } = require('../../lib/aspsp-resource-server/account-request.js');
 
 describe('Account Request', () => {
   it('Has a checkAuthorization Method', () => {
@@ -68,6 +67,7 @@ describe('Account Request', () => {
         setCachedAccountRequest,
         makeAccountRequestId,
         deleteCachedAccountRequest,
+        updateAccountRequestToAuthorised,
       } = accountRequestHelper;
 
       const requestData = {
@@ -78,9 +78,12 @@ describe('Account Request', () => {
       const accountRequestObject = buildPostResponse(accountRequestId, requestData);
       assert.equal(accountRequestObject.Data.Status, 'AwaitingAuthorisation');
       setCachedAccountRequest(accountRequestId, accountRequestObject);
-      const getResp = buildGetResponse(accountRequestId);
-      assert.equal(getResp.Data.AccountRequestId, accountRequestId);
-      assert.equal(getResp.Data.Status, 'Authorised');
+      const getResp1 = buildGetResponse(accountRequestId);
+      assert.equal(getResp1.Data.AccountRequestId, accountRequestId);
+      assert.equal(getResp1.Data.Status, 'AwaitingAuthorisation');
+      updateAccountRequestToAuthorised(accountRequestId);
+      const getResp2 = buildGetResponse(accountRequestId);
+      assert.equal(getResp2.Data.Status, 'Authorised');
       const firstTry = deleteCachedAccountRequest(accountRequestId);
       const secondTry = deleteCachedAccountRequest(accountRequestId);
       const emptyResp = buildGetResponse(accountRequestId);
