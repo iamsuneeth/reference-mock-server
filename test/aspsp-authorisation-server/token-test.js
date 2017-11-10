@@ -19,13 +19,30 @@ describe('createToken', () => {
     process.env.CLIENT_SECRET = null;
   });
 
-  const requestToken = (authCredentials, data) => {
+  const requestTokenForClientCredentials = (authCredentials, data) => {
     const body = data || {
       scope: 'accounts',
       grant_type: 'client_credentials',
     };
     let requestObj = request(app)
-      .post('/token')
+      .post('/abc/token')
+      .set('Accept', 'application/json');
+    if (authCredentials) {
+      requestObj = requestObj.set('authorization', authCredentials);
+    }
+    return requestObj
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .send(body);
+  };
+
+  const requestTokenForAuthorizationCode = (authCredentials, data) => {
+    const body = data || {
+      grant_type: 'authorization_code',
+      redirect_url: 'some-redirect-url',
+      code: 'sample-authorization-code',
+    };
+    let requestObj = request(app)
+      .post('/abc/token')
       .set('Accept', 'application/json');
     if (authCredentials) {
       requestObj = requestObj.set('authorization', authCredentials);
@@ -37,7 +54,7 @@ describe('createToken', () => {
 
   it('returns 401 when credentials invalid', async () => {
     const invalidCredentials = credentials('bad-id', 'bad-secret');
-    const res = await requestToken(invalidCredentials);
+    const res = await requestTokenForClientCredentials(invalidCredentials);
     assert.equal(res.status, 401);
     assert.equal(res.headers['www-authenticate'], 'client_credentials');
     assert.deepEqual(res.body, {
@@ -46,7 +63,7 @@ describe('createToken', () => {
   });
 
   it('returns 400 when credentials not send', async () => {
-    const res = await requestToken(null);
+    const res = await requestTokenForClientCredentials(null);
     assert.equal(res.status, 400);
     assert.deepEqual(res.body, {
       error: 'invalid_client',
@@ -54,17 +71,8 @@ describe('createToken', () => {
     });
   });
 
-  it('returns 400 when grant_type missing', async () => {
-    const res = await requestToken(validCredentials, { scope: 'accounts' });
-    assert.equal(res.status, 400);
-    assert.deepEqual(res.body, {
-      error: 'invalid_request',
-      error_description: 'grant_type missing from request body',
-    });
-  });
-
-  it('returns 400 when scope missing', async () => {
-    const res = await requestToken(validCredentials, { grant_type: 'client_credentials' });
+  it('returns 400 when scope missing in client credentials flow', async () => {
+    const res = await requestTokenForClientCredentials(validCredentials, { grant_type: 'client_credentials' });
     assert.equal(res.status, 400);
     assert.deepEqual(res.body, {
       error: 'invalid_request',
@@ -72,8 +80,26 @@ describe('createToken', () => {
     });
   });
 
-  it('returns access token payload when credentials valid', async () => {
-    const res = await requestToken(validCredentials);
+  it('returns 400 when authorization code is missing in authorization code flow', async () => {
+    const res = await requestTokenForClientCredentials(validCredentials, { grant_type: 'authorization_code' });
+    assert.equal(res.status, 400);
+    assert.deepEqual(res.body, {
+      error: 'invalid_request',
+      error_description: 'authorisation code missing from request body',
+    });
+  });
+
+  it('returns 400 when redirect url is missing in authorization code flow', async () => {
+    const res = await requestTokenForClientCredentials(validCredentials, { grant_type: 'authorization_code', code: '123' });
+    assert.equal(res.status, 400);
+    assert.deepEqual(res.body, {
+      error: 'invalid_request',
+      error_description: 'redirect url missing from request body',
+    });
+  });
+
+  it('returns access token payload for client credentials flow when credentials valid', async () => {
+    const res = await requestTokenForClientCredentials(validCredentials);
     assert.equal(res.status, 200);
     assert.deepEqual(res.body, {
       access_token: accessToken,
@@ -83,20 +109,48 @@ describe('createToken', () => {
     });
   });
 
-  it('sets Content-Type to application/json;charset=UTF-8', async () => {
-    const res = await requestToken(validCredentials);
+  it('sets Content-Type to application/json;charset=UTF-8 in client credentials flow', async () => {
+    const res = await requestTokenForClientCredentials(validCredentials);
     assert.ok(res.headers['content-type']);
     assert.equal(res.headers['content-type'], 'application/json; charset=utf-8');
   });
 
-  it('sets no-store in Cache-Control header', async () => {
-    const res = await requestToken(validCredentials);
+  it('sets no-store in Cache-Control header in client credentials flow', async () => {
+    const res = await requestTokenForClientCredentials(validCredentials);
     assert.ok(res.headers['cache-control']);
     assert.equal(res.headers['cache-control'], 'no-store');
   });
 
-  it('sets no-store in Pragma header', async () => {
-    const res = await requestToken(validCredentials);
+  it('sets no-store in Pragma header in client credentials flow', async () => {
+    const res = await requestTokenForClientCredentials(validCredentials);
+    assert.ok(res.headers.pragma);
+    assert.equal(res.headers.pragma, 'no-store');
+  });
+
+  it('returns access token payload for authorization code flow when credentials valid', async () => {
+    const res = await requestTokenForAuthorizationCode(validCredentials);
+    assert.equal(res.status, 200);
+    assert.deepEqual(res.body, {
+      access_token: accessToken,
+      expires_in: 3600,
+      token_type: 'bearer',
+    });
+  });
+
+  it('sets Content-Type to application/json;charset=UTF-8 in authorization code flow', async () => {
+    const res = await requestTokenForAuthorizationCode(validCredentials);
+    assert.ok(res.headers['content-type']);
+    assert.equal(res.headers['content-type'], 'application/json; charset=utf-8');
+  });
+
+  it('sets no-store in Cache-Control header in authorization code flow', async () => {
+    const res = await requestTokenForAuthorizationCode(validCredentials);
+    assert.ok(res.headers['cache-control']);
+    assert.equal(res.headers['cache-control'], 'no-store');
+  });
+
+  it('sets no-store in Pragma header in authorization code flow', async () => {
+    const res = await requestTokenForAuthorizationCode(validCredentials);
     assert.ok(res.headers.pragma);
     assert.equal(res.headers.pragma, 'no-store');
   });
