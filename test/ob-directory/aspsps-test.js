@@ -24,7 +24,10 @@ describe('/scim/v2/OBAccountPaymentServiceProviders', () => {
     server = proxyquire('../../lib/app.js', {
       './ob-directory': directoryServer,
     });
+    process.env.HOST = 'http://example.com';
   });
+
+  after(() => delete process.env.HOST);
 
 
   it('returns JSON payload', (done) => {
@@ -35,11 +38,11 @@ describe('/scim/v2/OBAccountPaymentServiceProviders', () => {
         const authServer = res.body.Resources[0].AuthorisationServers[0];
         assert.equal(res.status, 200);
         assert.equal(res.body.Resources.length, 3);
-        assert.equal(res.body.Resources[0].id, 'aaa-example-bank');
+        assert.equal(res.body.Resources[0].id, 'aaax5nTR33811QyQfi');
         assert.equal(authServer.CustomerFriendlyName, 'AAA Example Bank');
-        assert.equal(authServer.BaseApiDNSUri, 'http://aaa-example-bank.example.com');
+        assert.equal(authServer.BaseApiDNSUri, 'http://example.com');
         assert.equal(authServer.CustomerFriendlyLogoUri, '');
-        assert.equal(authServer.OpenIDConfigEndPointUri, `${openIdConfigUrl}/${res.body.Resources[0].id}`);
+        assert.equal(authServer.OpenIDConfigEndPointUri, `${openIdConfigUrl}/aaaj4NmBD8lQxmLh2O9FLY`);
         done();
       });
   });

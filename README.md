@@ -39,6 +39,7 @@ DEBUG=error,log \
   PORT=8001 \
   OPENID_CONFIG_ENDPOINT_URL=http://localhost:$PORT/openid/config \
   OPENID_ASPSP_AUTH_HOST=http://localhost:$PORT \
+  HOST=http://localhost:$PORT \
   npm start
 # running on localhost:8001 ...
 ```
@@ -110,6 +111,8 @@ heroku config:set VERSION=<version-for-api-uri>
 heroku config:set OPENID_CONFIG_ENDPOINT_URL=https://<heroku-host-domain>/openid/config
 
 heroku config:set OPENID_ASPSP_AUTH_HOST=https://<heroku-host-domain>
+
+heroku config:set HOST=https://<heroku-host-domain>
 
 git push heroku master
 ```
