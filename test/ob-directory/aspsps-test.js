@@ -38,11 +38,11 @@ describe('/scim/v2/OBAccountPaymentServiceProviders', () => {
         const authServer = res.body.Resources[0].AuthorisationServers[0];
         assert.equal(res.status, 200);
         assert.equal(res.body.Resources.length, 3);
-        assert.equal(res.body.Resources[0].id, 'aaax5nTR33811QyQfi');
+        assert.equal(res.body.Resources[0].id, 'aaax5nTR33811Qy');
         assert.equal(authServer.CustomerFriendlyName, 'AAA Example Bank');
         assert.equal(authServer.BaseApiDNSUri, 'http://example.com');
         assert.equal(authServer.CustomerFriendlyLogoUri, '');
-        assert.equal(authServer.OpenIDConfigEndPointUri, `${openIdConfigUrl}/aaaj4NmBD8lQxmLh2O9FLY`);
+        assert.equal(authServer.OpenIDConfigEndPointUri, `${openIdConfigUrl}/aaaj4NmBD8lQxmLh2O`);
         done();
       });
   });
