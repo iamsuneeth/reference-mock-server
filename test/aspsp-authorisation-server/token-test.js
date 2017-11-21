@@ -38,7 +38,7 @@ describe('createToken', () => {
   const requestTokenForAuthorizationCode = (authCredentials, data) => {
     const body = data || {
       grant_type: 'authorization_code',
-      redirect_url: 'some-redirect-url',
+      redirect_uri: 'some-redirect-url',
       code: 'sample-authorization-code',
     };
     let requestObj = request(app)
@@ -89,12 +89,12 @@ describe('createToken', () => {
     });
   });
 
-  it('returns 400 when redirect url is missing in authorization code flow', async () => {
+  it('returns 400 when redirect uri is missing in authorization code flow', async () => {
     const res = await requestTokenForClientCredentials(validCredentials, { grant_type: 'authorization_code', code: '123' });
     assert.equal(res.status, 400);
     assert.deepEqual(res.body, {
       error: 'invalid_request',
-      error_description: 'redirect url missing from request body',
+      error_description: 'redirect uri missing from request body',
     });
   });
 
