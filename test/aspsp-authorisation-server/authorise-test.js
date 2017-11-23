@@ -29,7 +29,7 @@ describe('/authorize endpoint test', () => {
 
   it('request authorisation code and validate other redirection params (all optional parameters provided)', (done) => {
     request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&clientId=ABC&response_type=code&request=jwttoken&scope=openid accounts`)
+      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&response_type=code&request=jwttoken&scope=openid accounts`)
       .end((err, res) => {
         assert.equal(res.status, 302);
         assert.strictEqual(res.redirect, true);
@@ -44,7 +44,7 @@ describe('/authorize endpoint test', () => {
 
   it('request authorisation code and validate other redirection params (none of optional parameters provided)', (done) => {
     request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&clientId=ABC&response_type=code&request=jwttoken`)
+      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&client_id=ABC&response_type=code&request=jwttoken`)
       .end((err, res) => {
         assert.equal(res.status, 302);
         assert.strictEqual(res.redirect, true);
@@ -59,14 +59,14 @@ describe('/authorize endpoint test', () => {
 
   it('returns BAD REQUEST when redirection_url is not provided', (done) => {
     request(server.app)
-      .get(`/aaa-bank/authorize?state=${state}&clientId=ABC&response_type=code&request=jwttoken`)
+      .get(`/aaa-bank/authorize?state=${state}&client_id=ABC&response_type=code&request=jwttoken`)
       .end((err, res) => {
         assert.equal(res.status, 400);
         done();
       });
   });
 
-  it('returns BAD REQUEST when clientId is not provided', (done) => {
+  it('returns BAD REQUEST when client_id is not provided', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=code&request=jwttoken`)
       .end((err, res) => {
@@ -77,7 +77,7 @@ describe('/authorize endpoint test', () => {
 
   it('redirects with 302 (FOUND), state and error flag invalid request when response_type is not provided', (done) => {
     request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&clientId=ABC&request=jwttoken`)
+      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&request=jwttoken`)
       .end((err, res) => {
         assert.equal(res.status, 302);
         assert.strictEqual(res.redirect, true);
@@ -92,7 +92,7 @@ describe('/authorize endpoint test', () => {
   });
   it('redirects with 302 (FOUND), error flag invalid request when response_type is not provided and not state', (done) => {
     request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&clientId=ABC&request=jwttoken`)
+      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&client_id=ABC&request=jwttoken`)
       .end((err, res) => {
         assert.equal(res.status, 302);
         assert.strictEqual(res.redirect, true);
@@ -107,7 +107,7 @@ describe('/authorize endpoint test', () => {
   });
   it('redirects with 302 (FOUND), state and error flag unsupported_response_type when response_type is not supported', (done) => {
     request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=not-supported&clientId=ABC&request=jwttoken`)
+      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=not-supported&client_id=ABC&request=jwttoken`)
       .end((err, res) => {
         assert.equal(res.status, 302);
         assert.strictEqual(res.redirect, true);
@@ -122,7 +122,7 @@ describe('/authorize endpoint test', () => {
   });
   it('redirects with 302 (FOUND), state and error flag invalid_scope when scope is defined but not supported', (done) => {
     request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=code&clientId=ABC&request=jwttoken&scope=not-supported`)
+      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=code&client_id=ABC&request=jwttoken&scope=not-supported`)
       .end((err, res) => {
         assert.equal(res.status, 302);
         assert.strictEqual(res.redirect, true);

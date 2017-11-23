@@ -36,6 +36,8 @@ describe('dataSource when data exists', () => {
 
   beforeEach(() => {
     process.env.VERSION = version;
+    process.env.USER_DATA_DIRECTORY = authorization;
+    process.env.BANK_DATA_DIRECTORY = financialId;
     mkdirp.sync(`./data/${financialId}/${authorization}/accounts/123`);
     const file = `./data/${financialId}/${authorization}/${path}.json`;
     fs.writeFileSync(file, JSON.stringify(transactions));
@@ -48,6 +50,8 @@ describe('dataSource when data exists', () => {
     fs.rmdirSync(`./data/${financialId}/${authorization}/accounts`);
     fs.rmdirSync(`./data/${financialId}/${authorization}`);
     fs.rmdirSync(`./data/${financialId}`);
+    delete process.env.USER_DATA_DIRECTORY;
+    delete process.env.BANK_DATA_DIRECTORY;
   });
 
   it('returns data based on request headers and path', (done) => {
