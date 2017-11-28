@@ -27,7 +27,7 @@ describe('/authorize endpoint test', () => {
     });
   });
 
-  it('request authorisation code and validate other redirection params for account request flow(all optional parameters provided)', (done) => {
+  it('validate ASPSP redirection uri params for account request flow and code/state in response header', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&response_type=code&request=jwttoken&scope=openid accounts`)
       .end((err, res) => {
@@ -42,7 +42,7 @@ describe('/authorize endpoint test', () => {
       });
   });
 
-  it('request authorisation code and validate other redirection params for payments flow (all optional parameters provided)', (done) => {
+  it('validate ASPSP redirection uri params for payments request flow and code/state in response header', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&response_type=code&request=jwttoken&scope=openid payments`)
       .end((err, res) => {
@@ -57,7 +57,7 @@ describe('/authorize endpoint test', () => {
       });
   });
 
-  it('request authorisation code and validate other redirection params (none of optional parameters provided)', (done) => {
+  it('validate if is not provided in response when not defined in ASPSP redirection uri', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&client_id=ABC&response_type=code&request=jwttoken`)
       .end((err, res) => {
@@ -72,7 +72,7 @@ describe('/authorize endpoint test', () => {
       });
   });
 
-  it('returns BAD REQUEST when redirection_url is not provided', (done) => {
+  it('returns BAD REQUEST when redirection_uri is not provided', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?state=${state}&client_id=ABC&response_type=code&request=jwttoken`)
       .end((err, res) => {
@@ -105,7 +105,7 @@ describe('/authorize endpoint test', () => {
         done();
       });
   });
-  it('redirects with 302 (FOUND), error flag invalid request when response_type is not provided and not state', (done) => {
+  it('redirects with 302 (FOUND), "invalid_request" error when response_type and state are not provided', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&client_id=ABC&request=jwttoken`)
       .end((err, res) => {
@@ -120,7 +120,7 @@ describe('/authorize endpoint test', () => {
         done();
       });
   });
-  it('redirects with 302 (FOUND), state and error flag unsupported_response_type when response_type is not supported', (done) => {
+  it('redirects with 302 (FOUND), state and "unsupported_response_type" error when response_type is not supported', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=not-supported&client_id=ABC&request=jwttoken`)
       .end((err, res) => {
@@ -135,7 +135,7 @@ describe('/authorize endpoint test', () => {
         done();
       });
   });
-  it('redirects with 302 (FOUND), state and error flag invalid_scope when scope is defined but not supported', (done) => {
+  it('redirects with 302 (FOUND), state and "invalid_scope" error when scope is defined but not supported', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=code&client_id=ABC&request=jwttoken&scope=not-supported`)
       .end((err, res) => {
