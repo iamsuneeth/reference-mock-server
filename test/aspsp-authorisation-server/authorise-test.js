@@ -27,9 +27,24 @@ describe('/authorize endpoint test', () => {
     });
   });
 
-  it('request authorisation code and validate other redirection params (all optional parameters provided)', (done) => {
+  it('request authorisation code and validate other redirection params for account request flow(all optional parameters provided)', (done) => {
     request(server.app)
       .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&response_type=code&request=jwttoken&scope=openid accounts`)
+      .end((err, res) => {
+        assert.equal(res.status, 302);
+        assert.strictEqual(res.redirect, true);
+        const { location } = res.header;
+        assert.ok(location);
+        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
+        assert.ok(location.includes(`code=${authorsationCode}`));
+        assert.ok(location.includes(`state=${state}`));
+        done();
+      });
+  });
+
+  it('request authorisation code and validate other redirection params for payments flow (all optional parameters provided)', (done) => {
+    request(server.app)
+      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&response_type=code&request=jwttoken&scope=openid payments`)
       .end((err, res) => {
         assert.equal(res.status, 302);
         assert.strictEqual(res.redirect, true);
