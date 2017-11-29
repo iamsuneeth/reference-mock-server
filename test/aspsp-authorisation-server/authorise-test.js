@@ -1,153 +1,68 @@
 const assert = require('assert');
 const request = require('supertest'); // eslint-disable-line
+const httpMocks = require('node-mocks-http');
+
 const proxyquire = require('proxyquire');
 const env = require('env-var');
 
 describe('/authorize endpoint test', () => {
-  let server;
-  let authorisationService;
-  let authoriseEndpoint;
+  let authoriseService;
   const state = '123456';
   const aspspCallbackRedirectionUrl = 'http://example.com/aaa-bank-url';
   const authorsationCode = 'ABCD123456789';
 
+  const refQuery = {
+    redirect_uri: aspspCallbackRedirectionUrl,
+    state,
+    client_id: 'ABC',
+    response_type: 'code',
+    request: 'jwttoken',
+    scope: 'openid accounts',
+  };
+
   before(() => {
-    authoriseEndpoint = proxyquire('../../lib/aspsp-authorisation-server/authorise', {
+    process.env.AUTHORISATION_CODE = authorsationCode;
+    authoriseService = proxyquire('../../lib/aspsp-authorisation-server/authorise', {
       'env-var': env.mock({
         AUTHORISATION_CODE: authorsationCode,
       }),
     });
+  });
 
-    authorisationService = proxyquire('../../lib/aspsp-authorisation-server', {
-      './authorise': authoriseEndpoint,
+
+  it('Validate successful ASPSP AS authorisation for account flow ', () => {
+    const { authorise } = authoriseService;
+    const query = Object.assign({}, refQuery);
+    const req = httpMocks.createRequest({
+      method: 'GET',
+      url: '/aaa-bank/authorize',
+      query,
     });
+    const res = httpMocks.createResponse();
+    authorise(req, res);
+    assert.equal(res.statusCode, 302);
+    const location = res._getRedirectUrl();  //eslint-disable-line
+    assert.ok(location);
+    assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
+    assert.ok(location.includes(`code=${authorsationCode}`));
+    assert.ok(location.includes(`state=${state}`));
+  });
 
-    server = proxyquire('../../lib/app.js', {
-      './aspsp-authorisation-server': authorisationService,
+  it('Validate successful ASPSP AS authorisation for payment flow ', () => {
+    const { authorise } = authoriseService;
+    const query = Object.assign({}, refQuery, { scope: 'openid payments' });
+    const req = httpMocks.createRequest({
+      method: 'GET',
+      url: '/aaa-bank/authorize',
+      query,
     });
-  });
-
-  it('validate ASPSP redirection uri params for account request flow and code/state in response header', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&response_type=code&request=jwttoken&scope=openid accounts`)
-      .end((err, res) => {
-        assert.equal(res.status, 302);
-        assert.strictEqual(res.redirect, true);
-        const { location } = res.header;
-        assert.ok(location);
-        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(location.includes(`code=${authorsationCode}`));
-        assert.ok(location.includes(`state=${state}`));
-        done();
-      });
-  });
-
-  it('validate ASPSP redirection uri params for payments request flow and code/state in response header', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&response_type=code&request=jwttoken&scope=openid payments`)
-      .end((err, res) => {
-        assert.equal(res.status, 302);
-        assert.strictEqual(res.redirect, true);
-        const { location } = res.header;
-        assert.ok(location);
-        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(location.includes(`code=${authorsationCode}`));
-        assert.ok(location.includes(`state=${state}`));
-        done();
-      });
-  });
-
-  it('validate if is not provided in response when not defined in ASPSP redirection uri', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&client_id=ABC&response_type=code&request=jwttoken`)
-      .end((err, res) => {
-        assert.equal(res.status, 302);
-        assert.strictEqual(res.redirect, true);
-        const { location } = res.header;
-        assert.ok(location);
-        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(location.includes('?code'));
-        assert.ok(!location.includes('state'));
-        done();
-      });
-  });
-
-  it('returns BAD REQUEST when redirection_uri is not provided', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?state=${state}&client_id=ABC&response_type=code&request=jwttoken`)
-      .end((err, res) => {
-        assert.equal(res.status, 400);
-        done();
-      });
-  });
-
-  it('returns BAD REQUEST when client_id is not provided', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=code&request=jwttoken`)
-      .end((err, res) => {
-        assert.equal(res.status, 400);
-        done();
-      });
-  });
-
-  it('redirects with 302 (FOUND), state and error flag invalid request when response_type is not provided', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&client_id=ABC&request=jwttoken`)
-      .end((err, res) => {
-        assert.equal(res.status, 302);
-        assert.strictEqual(res.redirect, true);
-        const { location } = res.header;
-        assert.ok(location);
-        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('code'));
-        assert.ok(location.includes(`state=${state}`));
-        assert.ok(location.includes('error=invalid_request'));
-        done();
-      });
-  });
-  it('redirects with 302 (FOUND), "invalid_request" error when response_type and state are not provided', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&client_id=ABC&request=jwttoken`)
-      .end((err, res) => {
-        assert.equal(res.status, 302);
-        assert.strictEqual(res.redirect, true);
-        const { location } = res.header;
-        assert.ok(location);
-        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('code'));
-        assert.ok(!location.includes('state'));
-        assert.ok(location.includes('error=invalid_request'));
-        done();
-      });
-  });
-  it('redirects with 302 (FOUND), state and "unsupported_response_type" error when response_type is not supported', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=not-supported&client_id=ABC&request=jwttoken`)
-      .end((err, res) => {
-        assert.equal(res.status, 302);
-        assert.strictEqual(res.redirect, true);
-        const { location } = res.header;
-        assert.ok(location);
-        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('code'));
-        assert.ok(location.includes(`state=${state}`));
-        assert.ok(location.includes('error=unsupported_response_type'));
-        done();
-      });
-  });
-  it('redirects with 302 (FOUND), state and "invalid_scope" error when scope is defined but not supported', (done) => {
-    request(server.app)
-      .get(`/aaa-bank/authorize?redirect_uri=${aspspCallbackRedirectionUrl}&state=${state}&response_type=code&client_id=ABC&request=jwttoken&scope=not-supported`)
-      .end((err, res) => {
-        assert.equal(res.status, 302);
-        assert.strictEqual(res.redirect, true);
-        const { location } = res.header;
-        assert.ok(location);
-        assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-        assert.ok(!location.includes('code'));
-        assert.ok(location.includes(`state=${state}`));
-        assert.ok(location.includes('error=invalid_scope'));
-        done();
-      });
+    const res = httpMocks.createResponse();
+    authorise(req, res);
+    assert.equal(res.statusCode, 302);
+    const location = res._getRedirectUrl();  //eslint-disable-line
+    assert.ok(location);
+    assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
+    assert.ok(location.includes(`code=${authorsationCode}`));
+    assert.ok(location.includes(`state=${state}`));
   });
 });
