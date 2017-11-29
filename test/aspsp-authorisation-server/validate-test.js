@@ -16,7 +16,7 @@ const refQuery = {
   scope: 'openid accounts',
 };
 
-describe('/authorize endpoint test', () => {
+describe('Validate query params for /:id/authorize endpoint', () => {
   it('validates valid query for accounts flow', () => {
     const query = Object.assign({}, refQuery);
     assert.doesNotThrow(() => { validate(query); }, Error);
