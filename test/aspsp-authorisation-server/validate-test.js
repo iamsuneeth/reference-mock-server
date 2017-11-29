@@ -17,37 +17,37 @@ const refQuery = {
 };
 
 describe('/authorize endpoint test', () => {
-  it('validate valid query for accounts flow', () => {
+  it('validates valid query for accounts flow', () => {
     const query = Object.assign({}, refQuery);
     assert.doesNotThrow(() => { validate(query); }, Error);
   });
 
-  it('validate valid query for payments flow', () => {
+  it('validates valid query for payments flow', () => {
     const query = Object.assign({}, refQuery, { scope: 'openid payments' });
     assert.doesNotThrow(() => { validate(query); }, Error);
   });
 
-  it('validate query with invalid scope ', () => {
+  it('validates query with invalid scope ', () => {
     const query = Object.assign({}, refQuery, { scope: 'openid invalid' });
     assert.throws(() => { validate(query); }, RedirectionException, 'Redirection due to invalid_scope');
   });
 
-  it('validate query with missind redirect_uri ', () => {
+  it('validates query with missind redirect_uri ', () => {
     const query = Object.assign({}, refQuery, { redirect_uri: null });
     assert.throws(() => { validate(query); }, ValidationException);
   });
 
-  it('validate query with missind client_id ', () => {
+  it('validates query with missind client_id ', () => {
     const query = Object.assign({}, refQuery, { client_id: null });
     assert.throws(() => { validate(query); }, ValidationException);
   });
 
-  it('validate query with missing request ', () => {
+  it('validates query with missing request ', () => {
     const query = Object.assign({}, refQuery, { request: null });
     assert.throws(() => { validate(query); }, RedirectionException, 'Redirection due to invalid_request');
   });
 
-  it('validate query with unsupported response type ', () => {
+  it('validates query with unsupported response type ', () => {
     const query = Object.assign({}, refQuery, { response_type: 'unsupported' });
     assert.throws(() => { validate(query); }, RedirectionException, 'Redirection due to unsupported_response_type');
   });
