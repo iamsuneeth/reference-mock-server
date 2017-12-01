@@ -1,6 +1,7 @@
 const assert = require('assert');
 const { postPaymentsResponse } = require('../../lib/aspsp-resource-server/payments.js');
 
+const risk = {};
 const request = {
   Data: {
     Initiation: {
@@ -18,7 +19,7 @@ const request = {
       },
     },
   },
-  Risk: { },
+  Risk: risk,
 };
 
 describe('postPaymentsResponse', () => {
@@ -33,6 +34,6 @@ describe('postPaymentsResponse', () => {
     assert.equal(data.Status, status);
 
     assert.deepEqual(data.Initiation, request.Data.Initiation);
-    assert.deepEqual(data.Risk, request.Data.Risk);
+    assert.deepEqual(response.Risk, risk);
   });
 });
