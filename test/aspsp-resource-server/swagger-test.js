@@ -13,7 +13,6 @@ describe('fetchSwagger', () => {
   describe('when SWAGGER env contains URI', () => {
     before(() => {
       sandbox.restore();
-      process.env.SWAGGER = uri;
     });
 
     nock(/example\.com/)
@@ -21,8 +20,8 @@ describe('fetchSwagger', () => {
       .reply(200, {});
 
     it('does HTTP GET of URI', async () => {
-      const file = await swagger.fetchSwagger();
-      assert.equal(file, './swagger.json');
+      const file = await swagger.fetchSwagger(uri, 'account-swagger.json');
+      assert.equal(file, './account-swagger.json');
     });
   });
 
@@ -31,7 +30,6 @@ describe('fetchSwagger', () => {
 
     before(() => {
       sandbox.restore();
-      process.env.SWAGGER = file;
       try {
         sandbox.stub(fs, 'existsSync').returns(true);
       } catch (e) {
@@ -39,12 +37,8 @@ describe('fetchSwagger', () => {
       }
     });
 
-    after(() => {
-      process.env.SWAGGER = null;
-    });
-
     it('checks env is a file that exists', async () => {
-      const result = await swagger.fetchSwagger();
+      const result = await swagger.fetchSwagger(file);
       assert(result, file);
       assert(fs.existsSync.calledWithMatch(file));
     });

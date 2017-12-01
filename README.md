@@ -36,6 +36,7 @@ Or to set environment variables on the command line:
 DEBUG=error,log \
   VERSION=v1.1 \
   SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/account-info-1-1-0-swagger.json \
+  PAYMENT_SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/payment-initiation-1-1-0-swagger.json \
   PORT=8001 \
   OPENID_CONFIG_ENDPOINT_URL=http://localhost:$PORT/openid/config \
   OPENID_ASPSP_AUTH_HOST=http://localhost:$PORT \
