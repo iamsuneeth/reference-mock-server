@@ -8,6 +8,19 @@ Reference mock server implemented using
 For details on usage, see the readme for the
 [TPP Reference Server](https://github.com/OpenBankingUK/tpp-reference-server#readme).
 
+## Use latest release
+
+Use the latest release [v0.5.0](https://github.com/OpenBankingUK/reference-mock-server/releases/tag/v0.5.0).
+
+To obtain the latest release:
+
+``sh
+git clone https://github.com/OpenBankingUK/reference-mock-server
+git checkout v0.5.0
+``
+
+Note: latest `master` branch code is actively under development and may not be stable.
+
 ## To run
 
 Mock server reads swagger file to generate endpoints.
