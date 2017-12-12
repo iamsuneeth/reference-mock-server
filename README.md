@@ -26,7 +26,7 @@ Note: latest `master` branch code is actively under development and may not be s
 Mock server reads swagger file to generate endpoints.
 
 The path or URI to the swagger file is passed to
-the mock server on startup using an environment variable `SWAGGER`.
+the mock server on startup using an environment variable `ACCOUNT_SWAGGER`.
 
 Install npm packages:
 
@@ -48,7 +48,7 @@ Or to set environment variables on the command line:
 ```sh
 DEBUG=error,log \
   VERSION=v1.1 \
-  SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/account-info-1-1-0-swagger.json \
+  ACCOUNT_SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/account-info-1-1-0-swagger.json \
   PAYMENT_SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/payment-initiation-1-1-0-swagger.json \
   PORT=8001 \
   OPENID_CONFIG_ENDPOINT_URL=http://localhost:$PORT/openid/config \
@@ -60,7 +60,7 @@ DEBUG=error,log \
 
 Set debug log levels using `DEBUG` env var.
 Set API URI version number using `VERSION` env var.
-Set API specification file using `SWAGGER` env var.
+Set API specification file using `ACCOUNT_SWAGGER` env var.
 
 ## ASPSP resource server mock data
 
@@ -118,7 +118,7 @@ heroku apps:rename <newname>
 
 heroku config:set DEBUG=error,log
 
-heroku config:set SWAGGER=swagger-uri
+heroku config:set ACCOUNT_SWAGGER=swagger-uri
 
 heroku config:set VERSION=<version-for-api-uri>
 
