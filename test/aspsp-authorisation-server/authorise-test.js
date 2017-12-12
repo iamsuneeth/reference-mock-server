@@ -30,9 +30,23 @@ describe('/authorize endpoint test', () => {
   });
 
 
-  it('Validate successful ASPSP AS authorisation for account flow ', () => {
+  it('Validate successful ASPSP AS authorisation and display consent approval page for account flow ', () => {
     const { authorise } = authoriseService;
     const query = Object.assign({}, refQuery);
+    const req = httpMocks.createRequest({
+      method: 'GET',
+      url: '/aaa-bank/authorize',
+      query,
+    });
+    const res = httpMocks.createResponse();
+    authorise(req, res);
+    assert.ok(res._getData().includes('Welcome to the bank')); //eslint-disable-line
+    assert.equal(res.statusCode, 200);
+  });
+
+  it('Validate successful ASPSP AS authorisation with approved consent for account flow ', () => {
+    const { authorise } = authoriseService;
+    const query = Object.assign({}, refQuery, { approve: 1 });
     const req = httpMocks.createRequest({
       method: 'GET',
       url: '/aaa-bank/authorize',
@@ -48,9 +62,9 @@ describe('/authorize endpoint test', () => {
     assert.ok(location.includes(`state=${state}`));
   });
 
-  it('Validate successful ASPSP AS authorisation for payment flow ', () => {
+  it('Validate successful ASPSP AS authorisation with approved consent for payment flow ', () => {
     const { authorise } = authoriseService;
-    const query = Object.assign({}, refQuery, { scope: 'openid payments' });
+    const query = Object.assign({}, refQuery, { scope: 'openid payments', approve: 1 });
     const req = httpMocks.createRequest({
       method: 'GET',
       url: '/aaa-bank/authorize',
@@ -64,5 +78,21 @@ describe('/authorize endpoint test', () => {
     assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
     assert.ok(location.includes(`code=${authorsationCode}`));
     assert.ok(location.includes(`state=${state}`));
+  });
+
+  it('Validate successful ASPSP AS authorisation with not approved consent for payment flow ', async () => {
+    const { authorise } = authoriseService;
+    const query = Object.assign({}, refQuery, { scope: 'openid payments', cancel: 1 });
+    const req = httpMocks.createRequest({
+      method: 'GET',
+      url: '/aaa-bank/authorize',
+      query,
+    });
+    const res = httpMocks.createResponse();
+    try {
+      await authorise(req, res);
+    } catch (e) {
+      assert.equal(e.message, 'Redirection due to access_denied');
+    }
   });
 });
