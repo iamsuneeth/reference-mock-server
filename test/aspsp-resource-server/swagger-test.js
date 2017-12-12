@@ -10,7 +10,7 @@ const nock = require('nock');
 describe('fetchSwagger', () => {
   const uri = 'https://example.com/path';
 
-  describe('when SWAGGER env contains URI', () => {
+  describe('when swagger path contains URI', () => {
     before(() => {
       sandbox.restore();
     });
@@ -25,7 +25,7 @@ describe('fetchSwagger', () => {
     });
   });
 
-  describe('when SWAGGER env does not contain URI', () => {
+  describe('when swagger path does not contain URI', () => {
     const file = './path/swagger.json';
 
     before(() => {
