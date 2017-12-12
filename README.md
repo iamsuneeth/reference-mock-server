@@ -23,18 +23,20 @@ Note: latest `master` branch code is actively under development and may not be s
 
 ## To run
 
-Mock server reads swagger file to generate endpoints.
-
-The path or URI to the swagger file is passed to
-the mock server on startup using an environment variable `ACCOUNT_SWAGGER`.
-
 Install npm packages:
 
 ```sh
 npm install
 ```
 
-To run using .env file, make a local .env, and run using foreman:
+Several environment variables are used to configure the mock server.
+
+The mock server reads swagger files to generate endpoints for Account Information
+and Payment Initiation resources. The path or URI to JSON swagger specification
+files are passed on startup using environment variables `ACCOUNT_SWAGGER` and
+`PAYMENT_SWAGGER`.
+
+To run, copy the `.env.sample` file to a local `.env` file, and run using foreman:
 
 ```sh
 cp .env.sample .env
@@ -43,24 +45,22 @@ npm run foreman
 # web.1 | log running on localhost:8001 ...
 ```
 
-Or to set environment variables on the command line:
+The `.env` file configures the following variables:
 
-```sh
-DEBUG=error,log \
-  VERSION=v1.1 \
-  ACCOUNT_SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/account-info-1-1-0-swagger.json \
-  PAYMENT_SWAGGER=https://www.openbanking.org.uk/wpcore/wp-content/uploads/2017/09/payment-initiation-1-1-0-swagger.json \
-  PORT=8001 \
-  OPENID_CONFIG_ENDPOINT_URL=http://localhost:$PORT/openid/config \
-  OPENID_ASPSP_AUTH_HOST=http://localhost:$PORT \
-  HOST=http://localhost:$PORT \
-  npm start
-# running on localhost:8001 ...
-```
-
-Set debug log levels using `DEBUG` env var.
-Set API URI version number using `VERSION` env var.
-Set API specification file using `ACCOUNT_SWAGGER` env var.
+* `ACCESS_TOKEN=<access-token-value>`
+* `ACCOUNT_SWAGGER=<JSON swagger spec URI or file path>`
+* `AUTHORISATION_CODE=<auth-code-value>`
+* `BANK_DATA_DIRECTORY=abcbank`
+* `CLIENT_ID=<client-id-value>`
+* `CLIENT_SECRET=<client-secret-value>`
+* `DEBUG =error,log`
+* `HOST=http://localhost:8001`
+* `OPENID_ASPSP_AUTH_HOST=http://localhost:8001`
+* `OPENID_CONFIG_ENDPOINT_URL=http://localhost:8001/openid/config`
+* `PAYMENT_SWAGGER=<JSON swagger spec URI or file path>`
+* `PORT=8001`
+* `USER_DATA_DIRECTORY=alice`
+* `VERSION=v1.1`
 
 ## ASPSP resource server mock data
 
