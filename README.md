@@ -67,8 +67,7 @@ The `.env` file configures the following variables:
 Currently mock data is read off the file system.
 
 For example, given the file
-`./data/abcbank/alice/accounts.json` exists, then setting
-request headers `x-fapi-financial-id: abcbank` and `Authorization: alice` when
+`./data/abcbank/alice/accounts.json` exists, then
 GET requesting `/accounts` returns the JSON in that file.
 
 ```sh
@@ -116,17 +115,32 @@ heroku create --region eu
 
 heroku apps:rename <newname>
 
+heroku config:set ACCESS_TOKEN=<access-token-value>
+
+heroku config:set ACCOUNT_SWAGGER=<JSON swagger spec URI>
+
+heroku config:set AUTHORISATION_CODE=<auth-code-value>
+
+heroku config:set BANK_DATA_DIRECTORY=abcbank
+
+heroku config:set CLIENT_ID=<client-id-value>
+
+heroku config:set CLIENT_SECRET=<client-secret-value>
+
 heroku config:set DEBUG=error,log
 
-heroku config:set ACCOUNT_SWAGGER=swagger-uri
+heroku config:set HOST=https://<heroku-host-domain>
 
-heroku config:set VERSION=<version-for-api-uri>
+heroku config:set
+OPENID_ASPSP_AUTH_HOST=https://<heroku-host-domain>
 
 heroku config:set OPENID_CONFIG_ENDPOINT_URL=https://<heroku-host-domain>/openid/config
 
-heroku config:set OPENID_ASPSP_AUTH_HOST=https://<heroku-host-domain>
+heroku config:set PAYMENT_SWAGGER=<JSON swagger spec URI>
 
-heroku config:set HOST=https://<heroku-host-domain>
+heroku config:set USER_DATA_DIRECTORY=alice
+
+heroku config:set VERSION=v1.1
 
 git push heroku master
 ```
