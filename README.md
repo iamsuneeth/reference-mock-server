@@ -10,13 +10,13 @@ For details on usage, see the readme for the
 
 ## Use latest release
 
-Use the latest release [v0.5.0](https://github.com/OpenBankingUK/reference-mock-server/releases/tag/v0.5.0).
+Use the latest release [v0.6.0](https://github.com/OpenBankingUK/reference-mock-server/releases/tag/v0.6.0).
 
 To obtain the latest release:
 
 ```sh
 git clone https://github.com/OpenBankingUK/reference-mock-server
-git checkout v0.5.0
+git checkout v0.6.0
 ```
 
 Note: latest `master` branch code is actively under development and may not be stable.
@@ -71,35 +71,12 @@ For example, given the file
 GET requesting `/accounts` returns the JSON in that file.
 
 ```sh
-curl -H "x-fapi-financial-id: abcbank" \
-     -H "Authorization: alice" \
+curl -H "Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA" \
      -H "Accept: application/json" \
+     -H "x-fapi-financial-id: bbbUB4fPIYB0k1m" \
      http://localhost:8001/open-banking/v1.1/accounts
 
-# {"Data":[{"AccountId":"22289","Currency"...
-
-# Or if using [httpie](https://httpie.org/), e.g. brew install httpie
-http --json http://localhost:8001/open-banking/v1.1/accounts \
-     x-fapi-financial-id:abcbank \
-     Authorization:alice
-
-```
-
-If a file matching the request does not exist, then 404 Not Found is returned.
-For example, requesting an account number not on file:
-
-```sh
-curl -H "Authorization: alice" \
-     -H "Accept: application/json" \
-     -H "x-fapi-financial-id: abcbank" \
-     http://localhost:8001/open-banking/v1.1/accounts/124
-
-# Not Found
-
-# Or if using [httpie](https://httpie.org/), e.g. brew install httpie
-http --json http://localhost:8001/open-banking/v1.1/accounts/124 \
-     x-fapi-financial-id:abcbank \
-     Authorization:alice
+# {"Data":[{"AccountId":"22290","Currency"...
 ```
 
 ## Deploy to heroku
@@ -148,26 +125,14 @@ git push heroku master
 To test (basic):
 ```sh
 curl https://<newname>.herokuapp.com/health
-
-# OK
-
-# Or if using [httpie](https://httpie.org/), e.g. brew install httpie
-http --json https://<newname>.herokuapp.com/health
-
 ```
 
 To test (advanced):
 ```sh
-curl -H "x-fapi-financial-id: abcbank" \
-     -H "Authorization: alice" \
+curl -H "Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA" \
      -H "Accept: application/json" \
+     -H "x-fapi-financial-id: bbbUB4fPIYB0k1m" \
      https://<newname>.herokuapp.com/open-banking/v1.1/accounts
 
-# {"Data":[{"AccountId":"22289","Currency"...
-
-# Or if using [httpie](https://httpie.org/), e.g. brew install httpie
-http --json https://<newname>.herokuapp.com/open-banking/v1.1/accounts \
-     x-fapi-financial-id:abcbank \
-     Authorization:alice
-
+# {"Data":[{"AccountId":"22290","Currency"...
 ```
