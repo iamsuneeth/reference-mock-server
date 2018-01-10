@@ -56,6 +56,7 @@ The `.env` file configures the following variables:
 * `DEBUG =error,log`
 * `HOST=http://localhost:8001`
 * `OPENID_ASPSP_AUTH_HOST=http://localhost:8001`
+* `OPENID_ASPSP_TOKEN_HOST=http://localhost:8001`
 * `OPENID_CONFIG_ENDPOINT_URL=http://localhost:8001/openid/config`
 * `PAYMENT_SWAGGER=<JSON swagger spec URI or file path>`
 * `PORT=8001`
