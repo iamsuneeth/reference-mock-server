@@ -31,6 +31,9 @@ describe('/openid/config/:id', () => {
         assert.equal(res.status, 200);
         assert.equal(oidConfig.authorization_endpoint, `${host}/${apspsId}/authorize`);
         assert.equal(oidConfig.token_endpoint, `${host}/${apspsId}/token`);
+        assert.deepEqual(oidConfig.scopes_supported, ['openid', 'accounts', 'payments']);
+        assert.deepEqual(oidConfig.id_token_signing_alg_values_supported, ['none']);
+        assert.deepEqual(oidConfig.request_object_signing_alg_values_supported, ['none']);
         done();
       });
   });
