@@ -1,4 +1,4 @@
-FROM node:8.3-alpine
+FROM node:8.4-alpine
 
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git
@@ -14,4 +14,3 @@ RUN npm install
 RUN cp .env.sample .env
 EXPOSE 8001
 CMD ["npm", "run", "foreman"]
-
