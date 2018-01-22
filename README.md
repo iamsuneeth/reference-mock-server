@@ -21,14 +21,45 @@ git checkout v0.7.0
 
 Note: latest `master` branch code is actively under development and may not be stable.
 
-## To run
+## Installation
+
+Below are instructions for [installing via docker](#installation-via-docker),
+and alternatively [installing directly on your local machine](#installation-on-local-machine).
+
+### Installation via Docker
+
+To install as a container-based app we assume
+[Docker](https://www.docker.com/community-edition) ver17.12+ is installed.
+
+If not installed you can find [Docker Community Edition downloads here](https://www.docker.com/community-edition#/download).
+
+To build docker image:
+
+```sh
+cd reference-mock-server
+docker build -t ob/reference-mock-server --build-arg TAG_VERSION=v0.x.0 .
+```
+
+Use `docker images` command to check `ob/reference-mock-server` and `node` have
+been created:
+
+```sh
+docker images
+# REPOSITORY                 TAG                 ...
+# ob/reference-mock-server   latest              ...
+# node                       8.4-alpine          ...
+```
+
+### Installation on Local Machine
+
+We assume [NodeJS](https://nodejs.org/en/) ver8.4+ is installed.
 
 Install npm packages:
 
 ```sh
+cd reference-mock-server
 npm install
 ```
-
 Several environment variables are used to configure the mock server.
 
 The mock server reads swagger files to generate endpoints for Account Information
