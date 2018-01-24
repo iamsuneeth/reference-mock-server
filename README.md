@@ -50,6 +50,18 @@ docker images
 # node                       8.4-alpine          ...
 ```
 
+To run the mock server container together with the TPP reference server follow the
+[TPP reference server Docker install steps](https://github.com/OpenBankingUK/tpp-reference-server/blob/master/README-DOCKER.md#installation-via-docker---for-quick-start-with-mocked-api).
+Following those steps will start both servers together.
+
+If you want to run **only** the mock server *without the TPP reference server*, you
+can run:
+
+```sh
+docker-compose up
+```
+
+
 ### Installation on Local Machine
 
 We assume [NodeJS](https://nodejs.org/en/) ver8.4+ is installed.
