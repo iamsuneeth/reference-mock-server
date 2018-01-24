@@ -21,14 +21,57 @@ git checkout v0.7.0
 
 Note: latest `master` branch code is actively under development and may not be stable.
 
-## To run
+## Installation
+
+Below are instructions for [installing via docker](#installation-via-docker),
+and alternatively [installing directly on your local machine](#installation-on-local-machine).
+
+### Installation via Docker
+
+To install as a container-based app we assume
+[Docker](https://www.docker.com/community-edition) ver17.12+ is installed.
+
+If not installed you can find [Docker Community Edition downloads here](https://www.docker.com/community-edition#/download).
+
+To build docker image:
+
+```sh
+cd reference-mock-server
+docker build -t ob/reference-mock-server --build-arg TAG_VERSION=v0.x.0 .
+```
+
+Use `docker images` command to check `ob/reference-mock-server` and `node` have
+been created:
+
+```sh
+docker images
+# REPOSITORY                 TAG                 ...
+# ob/reference-mock-server   latest              ...
+# node                       8.4-alpine          ...
+```
+
+To run the mock server container together with the TPP reference server follow the
+[TPP reference server Docker install steps](https://github.com/OpenBankingUK/tpp-reference-server/blob/master/README-DOCKER.md#installation-via-docker---for-quick-start-with-mocked-api).
+Following those steps will start both servers together.
+
+If you want to run **only** the mock server *without the TPP reference server*, you
+can run:
+
+```sh
+docker-compose up
+```
+
+
+### Installation on Local Machine
+
+We assume [NodeJS](https://nodejs.org/en/) ver8.4+ is installed.
 
 Install npm packages:
 
 ```sh
+cd reference-mock-server
 npm install
 ```
-
 Several environment variables are used to configure the mock server.
 
 The mock server reads swagger files to generate endpoints for Account Information
@@ -56,6 +99,7 @@ The `.env` file configures the following variables:
 * `DEBUG =error,log`
 * `HOST=http://localhost:8001`
 * `OPENID_ASPSP_AUTH_HOST=http://localhost:8001`
+* `OPENID_ASPSP_TOKEN_HOST=http://localhost:8001`
 * `OPENID_CONFIG_ENDPOINT_URL=http://localhost:8001/openid/config`
 * `PAYMENT_SWAGGER=<JSON swagger spec URI or file path>`
 * `PORT=8001`
