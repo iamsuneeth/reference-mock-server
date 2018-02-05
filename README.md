@@ -10,13 +10,13 @@ For details on usage, see the readme for the
 
 ## Use latest release
 
-Use the latest release [v0.7.0](https://github.com/OpenBankingUK/reference-mock-server/releases/tag/v0.7.0).
+Use the latest release [v0.8.0](https://github.com/OpenBankingUK/reference-mock-server/releases/tag/v0.8.0).
 
 To obtain the latest release:
 
 ```sh
 git clone https://github.com/OpenBankingUK/reference-mock-server
-git checkout v0.7.0
+git checkout v0.8.0
 ```
 
 Note: latest `master` branch code is actively under development and may not be stable.
