@@ -64,7 +64,7 @@ docker-compose up
 
 ### Installation on Local Machine
 
-We assume [NodeJS](https://nodejs.org/en/) ver8.4+ is installed.
+We assume [NodeJS](https://nodejs.org/en/) LTS is installed.
 
 Install npm packages:
 
