@@ -6,7 +6,6 @@ const proxyquire = require('proxyquire');
 const env = require('env-var');
 
 describe('/authorize endpoint test', () => {
-  let authoriseService;
   const state = '123456';
   const aspspCallbackRedirectionUrl = 'http://example.com/aaa-bank-url';
   const authorsationCode = 'ABCD123456789';
@@ -20,79 +19,79 @@ describe('/authorize endpoint test', () => {
     scope: 'openid accounts',
   };
 
-  before(() => {
-    process.env.AUTHORISATION_CODE = authorsationCode;
-    authoriseService = proxyquire('../../lib/aspsp-authorisation-server/authorise', {
-      'env-var': env.mock({
-        AUTHORISATION_CODE: authorsationCode,
-      }),
-    });
-  });
+  process.env.AUTHORISATION_CODE = authorsationCode;
+  const { authorise } = (proxyquire('../../lib/aspsp-authorisation-server/authorise', {
+    'env-var': env.mock({
+      AUTHORISATION_CODE: authorsationCode,
+    }),
+  }));
 
-
-  it('Validate successful ASPSP AS authorisation and display consent approval page for account flow ', () => {
-    const { authorise } = authoriseService;
-    const query = Object.assign({}, refQuery);
-    const req = httpMocks.createRequest({
+  const createRequest = (opts = {}) => {
+    const query = Object.assign({}, refQuery, opts);
+    return httpMocks.createRequest({
       method: 'GET',
       url: '/aaa-bank/authorize',
       query,
     });
-    const res = httpMocks.createResponse();
-    authorise(req, res);
-    assert.ok(res._getData().includes('Welcome to the bank')); //eslint-disable-line
-    assert.equal(res.statusCode, 200);
-  });
+  };
 
-  it('Validate successful ASPSP AS authorisation with approved consent for account flow ', () => {
-    const { authorise } = authoriseService;
-    const query = Object.assign({}, refQuery, { approve: 1 });
-    const req = httpMocks.createRequest({
-      method: 'GET',
-      url: '/aaa-bank/authorize',
-      query,
-    });
-    const res = httpMocks.createResponse();
-    authorise(req, res);
+  const assertRedirectionSuccessful = (res) => {
     assert.equal(res.statusCode, 302);
     const location = res._getRedirectUrl();  //eslint-disable-line
     assert.ok(location);
     assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
     assert.ok(location.includes(`code=${authorsationCode}`));
     assert.ok(location.includes(`state=${state}`));
+  };
+
+  afterEach(() => {
+    process.env.HEADLESS_CONSENT = 'false';
   });
 
-  it('Validate successful ASPSP AS authorisation with approved consent for payment flow ', () => {
-    const { authorise } = authoriseService;
-    const query = Object.assign({}, refQuery, { scope: 'openid payments', approve: 1 });
-    const req = httpMocks.createRequest({
-      method: 'GET',
-      url: '/aaa-bank/authorize',
-      query,
+  describe('consent approval page', () => {
+    it('should display when approval required and query params are valid', () => {
+      const req = createRequest();
+      const res = httpMocks.createResponse();
+      authorise(req, res);
+      assert.equal(res.statusCode, 200);
+      assert.ok(res._getData().includes('Welcome to the bank')); //eslint-disable-line
     });
-    const res = httpMocks.createResponse();
-    authorise(req, res);
-    assert.equal(res.statusCode, 302);
-    const location = res._getRedirectUrl();  //eslint-disable-line
-    assert.ok(location);
-    assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
-    assert.ok(location.includes(`code=${authorsationCode}`));
-    assert.ok(location.includes(`state=${state}`));
+
+    it('should be bypassed for headless consent and query params are valid', () => {
+      process.env.HEADLESS_CONSENT = 'true';
+      const req = createRequest();
+      const res = httpMocks.createResponse();
+      authorise(req, res);
+      assertRedirectionSuccessful(res);
+    });
   });
 
-  it('Validate successful ASPSP AS authorisation with not approved consent for payment flow ', async () => {
-    const { authorise } = authoriseService;
-    const query = Object.assign({}, refQuery, { scope: 'openid payments', cancel: 1 });
-    const req = httpMocks.createRequest({
-      method: 'GET',
-      url: '/aaa-bank/authorize',
-      query,
+  describe('approved consent', () => {
+    it('should redirect for account flow when query params are valid', () => {
+      const req = createRequest({ scope: 'openid accounts', approve: 1 });
+      const res = httpMocks.createResponse();
+      authorise(req, res);
+      assertRedirectionSuccessful(res);
     });
-    const res = httpMocks.createResponse();
-    try {
-      await authorise(req, res);
-    } catch (e) {
-      assert.equal(e.message, 'Redirection due to access_denied');
-    }
+
+    it('should redirect for payment flow when query params are valid', () => {
+      const req = createRequest({ scope: 'openid payments', approve: 1 });
+      const res = httpMocks.createResponse();
+      authorise(req, res);
+      assertRedirectionSuccessful(res);
+    });
+  });
+
+  describe('consent not approved', () => {
+    it('should throw an exception ', async () => {
+      const req = createRequest({ scope: 'openid payments', cancel: 1 });
+      const res = httpMocks.createResponse();
+      try {
+        await authorise(req, res);
+        assert.fail(new Error('Authorise should have failed.'));
+      } catch (e) {
+        assert.equal(e.message, 'Redirection due to access_denied');
+      }
+    });
   });
 });
