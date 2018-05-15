@@ -42,7 +42,7 @@ describe('/authorize endpoint test', () => {
     assert.ok(location.startsWith(aspspCallbackRedirectionUrl));
     assert.ok(location.includes(`code=${authorsationCode}`));
     assert.ok(location.includes(`state=${state}`));
-  }
+  };
 
   afterEach(() => {
     process.env.HEADLESS_CONSENT = 'false';
