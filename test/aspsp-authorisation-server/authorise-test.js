@@ -88,6 +88,7 @@ describe('/authorize endpoint test', () => {
       const res = httpMocks.createResponse();
       try {
         await authorise(req, res);
+        assert.fail(new Error('Authorise should have failed.'));
       } catch (e) {
         assert.equal(e.message, 'Redirection due to access_denied');
       }
