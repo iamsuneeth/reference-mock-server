@@ -1,4 +1,8 @@
-FROM node:8.4-alpine
+FROM node:8.11.1-alpine
+
+# Backup repository if the main one doesn't work
+# RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.5/main > /etc/apk/repositories; \
+#     echo http://mirror.yandex.ru/mirrors/alpine/v3.5/community >> /etc/apk/repositories
 
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git
@@ -6,9 +10,13 @@ RUN apk update && apk upgrade && \
 WORKDIR /home/node/app
 RUN chown -R node:node /home/node/app
 USER node:node
-ARG TAG_VERSION=master
-RUN git clone -b ${TAG_VERSION} --single-branch https://github.com/OpenBankingUK/reference-mock-server.git /home/node/app/reference-mock-server
+
+# ARG TAG_VERSION=master
+# RUN git clone -b ${TAG_VERSION} --single-branch https://github.com/OpenBankingUK/reference-mock-server.git /home/node/app/reference-mock-server
+RUN mkdir /home/node/app/reference-mock-server
+COPY . /home/node/app/reference-mock-server
 WORKDIR /home/node/app/reference-mock-server
+
 RUN npm install
 
 RUN cp .env.sample .env
