@@ -9,7 +9,7 @@
     "url": "git@github.com:OpenBankingUK/reference-mock-server.git"
   },
   "engines": {
-    "node": "8.4.0"
+    "node": "^8.11.1"
   },
   "scripts": {
     "foreman": "./node_modules/foreman/nf.js start",
