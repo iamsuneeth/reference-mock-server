@@ -11,8 +11,6 @@ WORKDIR /home/node/app
 RUN chown -R node:node /home/node/app
 USER node:node
 
-# ARG TAG_VERSION=master
-# RUN git clone -b ${TAG_VERSION} --single-branch https://github.com/OpenBankingUK/reference-mock-server.git /home/node/app/reference-mock-server
 RUN mkdir /home/node/app/reference-mock-server
 COPY . /home/node/app/reference-mock-server
 WORKDIR /home/node/app/reference-mock-server
