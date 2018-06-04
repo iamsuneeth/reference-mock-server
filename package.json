@@ -4,6 +4,10 @@
   "description": "Read/Write API mock data server",
   "author": "Open Banking Limited",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:OpenBankingUK/reference-mock-server.git"
+  },
   "engines": {
     "node": "^8.11.1"
   },
