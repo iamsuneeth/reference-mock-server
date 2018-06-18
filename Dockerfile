@@ -1,11 +1,4 @@
-FROM node:8.11.1-alpine
-
-# Backup repository if the main one doesn't work
-# RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.5/main > /etc/apk/repositories; \
-#     echo http://mirror.yandex.ru/mirrors/alpine/v3.5/community >> /etc/apk/repositories
-
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git
+FROM openbankinguk/node:latest
 
 WORKDIR /home/node/app
 RUN mkdir /home/node/app/reference-mock-server
