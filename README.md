@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/OpenBankingUK/reference-mock-server.svg?style=svg)](https://circleci.com/gh/OpenBankingUK/reference-mock-server)
+
 # Reference Mock Server
 
 Reference mock server implemented using
