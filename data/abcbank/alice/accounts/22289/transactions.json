@@ -1,0 +1,133 @@
+{
+    "Data": {
+        "Transaction": [
+            {
+                "AccountId": "500000000000000000000004",
+                "Amount": {
+                    "Amount": "18.15",
+                    "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BookingDateTime": "2017-01-28 00:00:00",
+                "BankTransactionCode": {
+                    "Code": "CustomerCardTransactions"
+                },
+                "MerchantDetails": {
+                  "MerchantName": "Antiques Merchant",
+                  "MerchantCategoryCode": "5932"
+                }
+            },
+            {
+                "AccountId": "500000000000000000000004",
+                "BookingDateTime": "2017-01-29 00:00:00",
+                "Amount": {
+                    "Amount": "2727.55",
+                    "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BankTransactionCode": {
+                    "Code": "IssuedDirectDebits"
+                },
+                "MerchantDetails": {
+                  "MerchantName": "Antiques Merchant",
+                  "MerchantCategoryCode": "5932"
+                }
+            },
+            {
+                "AccountId": "500000000000000000000004",
+                "BookingDateTime": "2017-01-29 00:00:00",
+                "Amount": {
+                    "Amount": "2.00",
+                    "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BankTransactionCode": {
+                    "Code": "CustomerCardTransactions"
+                },
+                "MerchantDetails": {
+                  "MerchantName": "Antiques Merchant",
+                  "MerchantCategoryCode": "5932"
+                }
+            },
+            {
+                "AccountId": "500000000000000000000004",
+                "BookingDateTime": "2017-01-30 00:00:00",
+                "Amount": {
+                    "Amount": "31.77",
+                    "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BankTransactionCode": {
+                    "Code": "IssuedDirectDebits"
+                },
+                "MerchantDetails": {
+                  "MerchantName": "Antiques Merchant",
+                  "MerchantCategoryCode": "5932"
+                }
+            },
+            {
+                "AccountId": "500000000000000000000004",
+                "BookingDateTime": "2017-01-30 00:00:00",
+                "Amount": {
+                    "Amount": "132.50",
+                    "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BankTransactionCode": {
+                    "Code": "IssuedDirectDebits"
+                },
+                "MerchantDetails": {
+                  "MerchantName": "Antiques Merchant",
+                  "MerchantCategoryCode": "5932"
+                }
+            },
+            {
+                "AccountId": "500000000000000000000004",
+                "BookingDateTime": "2017-01-30 00:00:00",
+                "Amount": {
+                    "Amount": "63.54",
+                    "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BankTransactionCode": {
+                    "Code": "IssuedDirectDebits"
+                },
+                "MerchantDetails": {
+                  "MerchantName": "Antiques Merchant",
+                  "MerchantCategoryCode": "5932"
+                }
+            },
+            {
+                "AccountId": "500000000000000000000004",
+                "BookingDateTime": "2017-01-30 00:00:00",
+                "Amount": {
+                    "Amount": "19.99",
+                    "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BankTransactionCode": {
+                    "Code": "IssuedDirectDebits"
+                },
+                "MerchantDetails": {
+                  "MerchantName": "Antiques Merchant",
+                  "MerchantCategoryCode": "5932"
+                }
+            }
+        ]
+    },
+    "Links": {
+        "Self": "/open-banking/v1.1/accounts/500000000000000000000004/transactions"
+    },
+    "Meta": {
+        "TotalPages": 1,
+        "FirstAvailableDateTime": "1970-01-01T00:00:00.000Z",
+        "LastAvailableDateTime": "2018-06-19T15:06:16.559Z"
+    }
+}
