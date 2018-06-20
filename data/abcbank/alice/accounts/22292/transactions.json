@@ -9,9 +9,10 @@
                 },
                 "CreditDebitIndicator": "Debit",
                 "Status": "Booked",
-                "BookingDateTime": "2017-01-28 00:00:00",
+                "BookingDateTime": "2017-01-28T00:00:00.000Z",
                 "BankTransactionCode": {
-                    "Code": "CustomerCardTransactions"
+                  "Code": "CustomerCardTransactions",
+                  "SubCode": "SubCodeCustomerCardTransactions"
                 },
                 "MerchantDetails": {
                   "MerchantName": "Antiques Merchant",
@@ -20,7 +21,7 @@
             },
             {
                 "AccountId": "500000000000000000000004",
-                "BookingDateTime": "2017-01-29 00:00:00",
+                "BookingDateTime": "2017-01-29T00:00:00.000Z",
                 "Amount": {
                     "Amount": "43.60",
                     "Currency": "GBP"
@@ -28,7 +29,8 @@
                 "CreditDebitIndicator": "Debit",
                 "Status": "Booked",
                 "BankTransactionCode": {
-                    "Code": "IssuedDirectDebits"
+                  "Code": "IssuedDirectDebits",
+                  "SubCode": "SubCodeIssuedDirectDebits"
                 },
                 "MerchantDetails": {
                   "MerchantName": "Antiques Merchant",
@@ -37,7 +39,7 @@
             },
             {
                 "AccountId": "500000000000000000000004",
-                "BookingDateTime": "2017-01-29 00:00:00",
+                "BookingDateTime": "2017-01-29T00:00:00.000Z",
                 "Amount": {
                     "Amount": "88.00",
                     "Currency": "GBP"
@@ -45,7 +47,8 @@
                 "CreditDebitIndicator": "Debit",
                 "Status": "Booked",
                 "BankTransactionCode": {
-                    "Code": "CustomerCardTransactions"
+                  "Code": "CustomerCardTransactions",
+                  "SubCode": "SubCodeCustomerCardTransactions"
                 },
                 "MerchantDetails": {
                   "MerchantName": "Antiques Merchant",
@@ -54,7 +57,7 @@
             },
             {
                 "AccountId": "500000000000000000000004",
-                "BookingDateTime": "2017-01-30 00:00:00",
+                "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "100.77",
                     "Currency": "GBP"
@@ -62,7 +65,8 @@
                 "CreditDebitIndicator": "Debit",
                 "Status": "Booked",
                 "BankTransactionCode": {
-                    "Code": "IssuedDirectDebits"
+                  "Code": "IssuedDirectDebits",
+                  "SubCode": "SubCodeIssuedDirectDebits"
                 },
                 "MerchantDetails": {
                   "MerchantName": "Antiques Merchant",
@@ -71,7 +75,7 @@
             },
             {
                 "AccountId": "500000000000000000000004",
-                "BookingDateTime": "2017-01-30 00:00:00",
+                "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "66.50",
                     "Currency": "GBP"
@@ -79,7 +83,8 @@
                 "CreditDebitIndicator": "Debit",
                 "Status": "Booked",
                 "BankTransactionCode": {
-                    "Code": "IssuedDirectDebits"
+                  "Code": "IssuedDirectDebits",
+                  "SubCode": "SubCodeIssuedDirectDebits"
                 },
                 "MerchantDetails": {
                   "MerchantName": "Antiques Merchant",
@@ -88,7 +93,7 @@
             },
             {
                 "AccountId": "500000000000000000000004",
-                "BookingDateTime": "2017-01-30 00:00:00",
+                "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "98.54",
                     "Currency": "GBP"
@@ -96,7 +101,8 @@
                 "CreditDebitIndicator": "Debit",
                 "Status": "Booked",
                 "BankTransactionCode": {
-                    "Code": "IssuedDirectDebits"
+                  "Code": "IssuedDirectDebits",
+                  "SubCode": "SubCodeIssuedDirectDebits"
                 },
                 "MerchantDetails": {
                   "MerchantName": "Antiques Merchant",
@@ -105,7 +111,7 @@
             },
             {
                 "AccountId": "500000000000000000000004",
-                "BookingDateTime": "2017-01-30 00:00:00",
+                "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "76.99",
                     "Currency": "GBP"
@@ -113,7 +119,8 @@
                 "CreditDebitIndicator": "Debit",
                 "Status": "Booked",
                 "BankTransactionCode": {
-                    "Code": "IssuedDirectDebits"
+                  "Code": "IssuedDirectDebits",
+                  "SubCode": "SubCodeIssuedDirectDebits"
                 },
                 "MerchantDetails": {
                   "MerchantName": "Antiques Merchant",
