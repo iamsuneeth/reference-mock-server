@@ -2,7 +2,7 @@
     "Data": {
         "Beneficiary": [
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22292",
                 "BeneficiaryId": "Benet",
                 "Reference": "BEntity4",
                 "Servicer": {
@@ -17,7 +17,7 @@
         ]
     },
     "Links": {
-        "Self": "/open-banking/v1.1/accounts/500000000000000000000004/beneficiaries"
+        "Self": "/open-banking/v1.1/accounts/22292/beneficiaries"
     },
     "Meta": {
         "TotalPages": 1,

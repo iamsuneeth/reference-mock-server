@@ -2,7 +2,7 @@
     "Data": {
         "Transaction": [
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22291",
                 "Amount": {
                     "Amount": "99.15",
                     "Currency": "GBP"
@@ -20,7 +20,7 @@
                 }
             },
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22291",
                 "BookingDateTime": "2017-01-29T00:00:00.000Z",
                 "Amount": {
                     "Amount": "1000.00",
@@ -38,7 +38,7 @@
                 }
             },
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22291",
                 "BookingDateTime": "2017-01-29T00:00:00.000Z",
                 "Amount": {
                     "Amount": "100.00",
@@ -56,7 +56,7 @@
                 }
             },
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22291",
                 "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "88.77",
@@ -74,7 +74,7 @@
                 }
             },
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22291",
                 "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "21.50",
@@ -92,7 +92,7 @@
                 }
             },
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22291",
                 "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "77.54",
@@ -110,7 +110,7 @@
                 }
             },
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22291",
                 "BookingDateTime": "2017-01-30T00:00:00.000Z",
                 "Amount": {
                     "Amount": "15.99",
@@ -130,7 +130,7 @@
         ]
     },
     "Links": {
-        "Self": "/open-banking/v1.1/accounts/500000000000000000000004/transactions"
+        "Self": "/open-banking/v1.1/accounts/22291/transactions"
     },
     "Meta": {
         "TotalPages": 1,

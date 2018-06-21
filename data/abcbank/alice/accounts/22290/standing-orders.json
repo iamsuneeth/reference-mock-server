@@ -2,7 +2,7 @@
     "Data": {
         "Beneficiary": [
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22290",
                 "CreditorAccount": {
                   "SchemeName": "SortCodeAccountNumber",
                   "Identification": "BankY"
@@ -17,7 +17,7 @@
         ]
     },
     "Links": {
-        "Self": "/open-banking/v1.1/accounts/500000000000000000000004/standing-orders"
+        "Self": "/open-banking/v1.1/accounts/22290/standing-orders"
     },
     "Meta": {
         "TotalPages": 1,

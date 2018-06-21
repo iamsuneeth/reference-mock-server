@@ -2,14 +2,14 @@
     "Data": {
         "DirectDebit": [
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22289",
                 "Name": "British Gas",
                 "MandateIdentification": "AUDDISBG"
           }
         ]
     },
     "Links": {
-        "Self": "/open-banking/v1.1/accounts/500000000000000000000004/direct-debits"
+        "Self": "/open-banking/v1.1/accounts/22289/direct-debits"
     },
     "Meta": {
         "TotalPages": 1,

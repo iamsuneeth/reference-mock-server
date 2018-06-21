@@ -2,14 +2,14 @@
     "Data": {
         "DirectDebit": [
             {
-                "AccountId": "500000000000000000000004",
+                "AccountId": "22292",
                 "Name": "Charity X",
                 "MandateIdentification": "AUDDISCX"
           }
         ]
     },
     "Links": {
-        "Self": "/open-banking/v1.1/accounts/500000000000000000000004/direct-debits"
+        "Self": "/open-banking/v1.1/accounts/22292/direct-debits"
     },
     "Meta": {
         "TotalPages": 1,
