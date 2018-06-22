@@ -1,0 +1,19 @@
+{
+    "Data": {
+        "DirectDebit": [
+            {
+                "AccountId": "22290",
+                "Name": "Eon Electric",
+                "MandateIdentification": "AUDDISEE"
+          }
+        ]
+    },
+    "Links": {
+        "Self": "/open-banking/v1.1/accounts/22290/direct-debits"
+    },
+    "Meta": {
+        "TotalPages": 1,
+        "FirstAvailableDateTime": "1970-01-01T00:00:00.000Z",
+        "LastAvailableDateTime": "2018-06-19T15:06:16.559Z"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "Data": {
+        "Beneficiary": [
+            {
+                "AccountId": "22289",
+                "BeneficiaryId": "Benez",
+                "Reference": "BEntity1",
+                "Servicer": {
+                  "SchemeName": "BICFI",
+                  "Identification": "BankJ"
+                },
+                "CreditorAccount": {
+                  "SchemeName": "SortCodeAccountNumber",
+                  "Identification": "BankY"
+                }
+            }
+        ]
+    },
+    "Links": {
+        "Self": "/open-banking/v1.1/accounts/22289/beneficiaries"
+    },
+    "Meta": {
+        "TotalPages": 1,
+        "FirstAvailableDateTime": "1970-01-01T00:00:00.000Z",
+        "LastAvailableDateTime": "2018-06-19T15:06:16.559Z"
+    }
+}

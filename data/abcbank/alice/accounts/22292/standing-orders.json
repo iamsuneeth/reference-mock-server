@@ -1,0 +1,27 @@
+{
+    "Data": {
+        "Beneficiary": [
+            {
+                "AccountId": "22292",
+                "CreditorAccount": {
+                  "SchemeName": "SortCodeAccountNumber",
+                  "Identification": "BankY"
+                },
+                "Frequency": "IntrvlMnthDay:12:1",
+                "NextPaymentDateTime": "2018-07-19T15:06:16.559Z",
+                "NextPaymentAmount": {
+                  "Amount": "1432.50",
+                  "Currency": "GBP"
+                }
+            }
+        ]
+    },
+    "Links": {
+        "Self": "/open-banking/v1.1/accounts/22292/standing-orders"
+    },
+    "Meta": {
+        "TotalPages": 1,
+        "FirstAvailableDateTime": "1970-01-01T00:00:00.000Z",
+        "LastAvailableDateTime": "2018-06-19T15:06:16.559Z"
+    }
+}
