@@ -1,5 +1,6 @@
 FROM openbankinguk/node:latest
 
+WORKDIR /root/app/
 COPY . /root/app/
 RUN npm install
 
