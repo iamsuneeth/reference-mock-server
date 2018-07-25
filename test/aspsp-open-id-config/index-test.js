@@ -34,6 +34,7 @@ describe('/openid/config/:id', () => {
         assert.deepEqual(oidConfig.scopes_supported, ['openid', 'accounts', 'payments']);
         assert.deepEqual(oidConfig.id_token_signing_alg_values_supported, ['none']);
         assert.deepEqual(oidConfig.request_object_signing_alg_values_supported, ['none']);
+        assert.deepEqual(oidConfig.token_endpoint_auth_methods_supported, ['client_secret_basic']);
         done();
       });
   });
