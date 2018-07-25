@@ -12,9 +12,9 @@
     "node": "^8.11.1"
   },
   "scripts": {
-    "foreman": "node ./node_modules/foreman/nf.js start",
+    "foreman": "nf start",
     "start": "node index.js",
-    "eslint": "node ./node_modules/eslint/bin/eslint.js .",
+    "eslint": "eslint .",
     "checks": "npm run eslint && npm test ",
     "test": "NODE_ENV=test DEBUG=error mocha --recursive",
     "test:watch": "NODE_ENV=test DEBUG=error mocha --watch --recursive",
