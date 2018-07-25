@@ -12,7 +12,7 @@
     "node": "^8.11.1"
   },
   "scripts": {
-    "foreman": "./node_modules/foreman/nf.js start",
+    "foreman": "node ./node_modules/foreman/nf.js start",
     "start": "node index.js",
     "eslint": "node ./node_modules/eslint/bin/eslint.js .",
     "checks": "npm run eslint && npm test ",
