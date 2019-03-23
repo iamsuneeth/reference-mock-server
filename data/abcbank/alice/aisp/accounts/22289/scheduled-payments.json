@@ -1,0 +1,27 @@
+{
+  "Data": {
+    "ScheduledPayment": [
+      {
+        "AccountId": "22289",
+        "ScheduledPaymentId": "SP03",
+        "ScheduledPaymentDateTime": "2017-05-05T00:00:00+00:00",
+        "ScheduledType": "Execution",
+        "InstructedAmount": {
+          "Amount": "10.00",
+          "Currency": "GBP"
+        },
+        "CreditorAccount": {
+          "SchemeName": "UK.OBIE.SortCodeAccountNumber",
+          "Identification": "23605490179017",
+          "Name": "Mr Tee"
+        }
+      }
+    ]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/22289/scheduled-payments/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

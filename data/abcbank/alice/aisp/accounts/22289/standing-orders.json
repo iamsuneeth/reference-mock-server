@@ -1,0 +1,39 @@
+{
+    "Data": {
+      "StandingOrder": [
+        {
+          "AccountId": "22289",
+          "StandingOrderId": "Ben3",
+          "Frequency": "EvryWorkgDay",
+          "Reference": "Towbar Club 2 - We Love Towbars",
+          "FirstPaymentDateTime": "2017-08-12T00:00:00+00:00",
+          "FirstPaymentAmount": {
+            "Amount": "0.57",
+            "Currency": "GBP"
+          },
+          "NextPaymentDateTime": "2017-08-13T00:00:00+00:00",
+          "NextPaymentAmount": {
+            "Amount": "0.56",
+            "Currency": "GBP"
+          },
+          "FinalPaymentDateTime": "2027-08-12T00:00:00+00:00",
+          "FinalPaymentAmount": {
+            "Amount": "0.56",
+            "Currency": "GBP"
+          },
+          "StandingOrderStatusCode": "Active",
+          "CreditorAccount": {
+            "SchemeName": "UK.OBIE.SortCodeAccountNumber",
+            "Identification": "80200112345678",
+            "Name": "Mrs Juniper"
+          }
+        }
+      ]
+    },
+    "Links": {
+      "Self": "/open-banking/v3.1/aisp/accounts/22289/standing-orders/"
+    },
+    "Meta": {
+      "TotalPages": 1
+    }
+  }

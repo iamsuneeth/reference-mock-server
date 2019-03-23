@@ -1,0 +1,39 @@
+{
+  "Data": {
+    "Statement": [
+      {
+        "AccountId": "31820",
+        "StatementId": "9034ee-4ewa4e-342er6",
+        "StatementReference": "002",
+        "Type": "RegularPeriodic",
+        "StartDateTime": "2017-09-01T00:00:00+00:00",
+        "EndDateTime": "2017-09-30T23:59:59+00:00",
+        "CreationDateTime": "2017-10-01T00:00:00+00:00",
+        "StatementAmount": [
+          {
+            "Amount": {
+              "Amount": "2700.00",
+              "Currency": "GBP"
+            },
+            "CreditDebitIndicator": "Credit",
+            "Type": "ClosingBalance"
+          },
+          {
+            "Amount": {
+              "Amount": "4060.00",
+              "Currency": "GBP"
+            },
+            "CreditDebitIndicator": "Credit",
+            "Type": "PreviousClosingBalance"
+          }
+        ]
+      }
+    ]
+  },
+  "Links": {
+    "Self": "https://api.alphabank.com/open-banking/v3.1/aisp/accounts/31820/statements/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

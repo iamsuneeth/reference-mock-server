@@ -1,0 +1,21 @@
+{
+  "Data": {
+    "Product": [
+      {
+        "AccountId": "22289",
+        "ProductId": "51B",
+        "ProductType": "PersonalCurrentAccount",
+        "ProductName": "321 Product",
+        "PCA": {
+         
+        }
+      }
+    ]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/22289/product"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

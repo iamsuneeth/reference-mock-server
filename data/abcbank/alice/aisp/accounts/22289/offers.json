@@ -1,0 +1,32 @@
+{
+  "Data": {
+    "Offer": [
+      {
+        "AccountId": "22289",
+        "OfferId": "Offer1",
+        "OfferType": "LimitIncrease",
+        "Description": "Credit limit increase for the account up to £10000.00",
+        "Amount": {
+          "Amount": "10000.00",
+          "Currency": "GBP"
+        }
+      },
+      {
+        "AccountId": "22289",
+        "OfferId": "Offer2",
+        "OfferType": "BalanceTransfer",
+        "Description": "Balance transfer offer up to £2000",
+        "Amount": {
+          "Amount": "2000.00",
+          "Currency": "GBP"
+        }
+      }     
+    ]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/22289/offers/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

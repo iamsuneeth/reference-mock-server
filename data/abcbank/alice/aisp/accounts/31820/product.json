@@ -1,0 +1,19 @@
+{
+  "Data": {
+    "Product": [{
+      "AccountId": "31820",
+      "ProductId": "001",
+      "ProductType": "BusinessCurrentAccount",
+      "ProductName": "123 Product",
+      "BCA": { 
+
+       }
+    }]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/31820/product"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

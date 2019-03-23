@@ -1,0 +1,24 @@
+{
+    "Data": {
+        "Beneficiary": [
+            {
+                "AccountId": "31820",
+                "BeneficiaryId": "Ben37",
+                "Reference": "Golf Club",
+                "CreditorAccount": {
+                  "SchemeName": "UK.OBIE.SortCodeAccountNumber",
+                  "Identification": "87562298675421",
+                  "Name": "Mr Large"
+                }
+            }
+        ]
+    },
+    "Links": {
+        "Self": "/open-banking/v3.1/aisp/accounts/31820/beneficiaries"
+    },
+    "Meta": {
+        "TotalPages": 1,
+        "FirstAvailableDateTime": "1970-01-01T00:00:00.000Z",
+        "LastAvailableDateTime": "2018-06-19T15:06:16.559Z"
+    }
+}

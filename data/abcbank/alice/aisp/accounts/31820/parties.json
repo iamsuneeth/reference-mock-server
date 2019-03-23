@@ -1,0 +1,55 @@
+{
+  "Data": {
+    "Party": [
+      {
+        "PartyId": "PABC123",
+        "PartyType": "Sole",
+        "Name": "Semiotec",
+        "FullLegalName": "Semiotec Limited",
+        "LegalStructure": "UK.OBIE.PrivateLimitedCompany",
+        "BeneficialOwnership": true,
+        "AccountRole": "UK.OBIE.Principal",
+        "EmailAddress": "contact@semiotec.co.jp",
+        "Relationships": {
+          "Account": {
+            "Related": "/open-banking/v3.1/aisp/accounts/31820",
+            "Id": "31820"
+          }
+        },
+        "Address": [
+          {
+            "AddressType": "Business",
+            "StreetName": "Street",
+            "BuildingNumber": "15",
+            "PostCode": "NW1 1AB",
+            "TownName": "London",
+            "Country": "GB"
+          }
+        ]
+      },
+      {
+        "PartyId": "PXSIF023",
+        "PartyNumber": "0000007456",
+        "PartyType": "Delegate",
+        "Name": "Kevin Atkinson",
+        "FullLegalName": "Mr Kevin Bartholmew Atkinson",
+        "LegalStructure": "UK.OBIE.Individual",
+        "BeneficialOwnership": false,
+        "AccountRole": "UK.OBIE.Administrator",
+        "EmailAddress": "kev@semiotec.co.jp",
+        "Relationships": {
+          "Account": {
+            "Related": "/open-banking/v3.1/aisp/accounts/31820",
+            "Id": "31820"
+          }
+        }
+      }
+    ]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/31820/parties"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

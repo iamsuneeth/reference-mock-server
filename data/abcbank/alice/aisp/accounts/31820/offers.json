@@ -1,0 +1,22 @@
+{
+  "Data": {
+    "Offer": [
+      {
+        "AccountId": "31820",
+        "OfferId": "Offer3",
+        "OfferType": "LimitIncrease",
+        "Description": "Credit limit increase for the account up to £50000.00",
+        "Amount": {
+          "Amount": "50000.00",
+          "Currency": "GBP"
+        }
+      }  
+    ]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/31820/offers/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+    "Data": {
+        "DirectDebit": [
+            {
+                "AccountId": "31820",
+                "DirectDebitId": "DD77",
+                "MandateIdentification": "Golfers",
+                "DirectDebitStatusCode": "Active",
+                "Name": "Golf Club",
+                "PreviousPaymentDateTime": "2017-05-06T09:00:00+00:00",
+                "PreviousPaymentAmount": {
+                  "Amount": "22.30",
+                  "Currency": "GBP"
+                }
+            }
+        ]
+    },
+    "Links": {
+        "Self": "/open-banking/v3.1/aisp/accounts/31820/direct-debits"
+    },
+    "Meta": {
+        "TotalPages": 1,
+        "FirstAvailableDateTime": "1970-01-01T00:00:00.000Z",
+        "LastAvailableDateTime": "2018-06-19T15:06:16.559Z"
+    }
+}

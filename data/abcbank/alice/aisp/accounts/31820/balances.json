@@ -1,0 +1,22 @@
+{
+  "Data": {
+    "Balance": [
+      {
+        "AccountId": "31820",
+        "Amount": {
+          "Amount": "57.36",
+          "Currency": "GBP"
+        },
+        "CreditDebitIndicator": "Debit",
+        "Type": "InterimBooked",
+        "DateTime": "2017-05-02T14:22:09+00:00"
+      }
+    ]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/31820/balances/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

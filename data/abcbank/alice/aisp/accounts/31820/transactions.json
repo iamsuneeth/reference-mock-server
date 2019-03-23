@@ -1,0 +1,45 @@
+{
+    "Data": {
+        "Transaction": [
+            {
+                "AccountId": "31820",
+                "TransactionId": "567",
+                "TransactionReference": "Ref 124",
+                "Amount": {
+                  "Amount": "100.00",
+                  "Currency": "GBP"
+                },
+                "CreditDebitIndicator": "Debit",
+                "Status": "Booked",
+                "BookingDateTime": "2017-05-02T14:22:09+00:00",
+                "ValueDateTime": "2017-05-02T14:22:09+00:00",
+                "TransactionInformation": "Paid the gas bill",
+                "AddressLine": "Coventry",
+                "BankTransactionCode": {
+                  "Code": "IssuedCreditTransfer",
+                  "SubCode": "AutomaticTransfer"
+                },
+                "ProprietaryBankTransactionCode": {
+                  "Code": "DirectDebit",
+                  "Issuer": "AlphaBank"
+                },
+                "Balance": {
+                  "Amount": {
+                    "Amount": "57.36",
+                    "Currency": "GBP"
+                  },
+                  "CreditDebitIndicator": "Debit",
+                  "Type": "InterimBooked"
+                }
+              }
+        ]
+    },
+    "Links": {
+        "Self": "/open-banking/v3.1/aisp/accounts/31820/transactions"
+    },
+    "Meta": {
+        "TotalPages": 1,
+        "FirstAvailableDateTime": "1970-01-01T00:00:00.000Z",
+        "LastAvailableDateTime": "2018-06-19T15:06:16.559Z"
+    }
+}

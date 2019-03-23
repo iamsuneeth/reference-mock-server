@@ -1,0 +1,24 @@
+{
+  "Data": {
+    "Party": {
+      "PartyId": "PABC123",
+      "PartyType": "Sole",
+      "Name": "Semiotec",
+      "Email": "contact@semiotec.co.jp",
+      "Address": {
+        "AddressType": "Business",
+        "StreetName": "Street",
+        "BuildingNumber": "15",
+        "PostCode": "NW1 1AB",
+        "TownName": "London",
+        "Country": "GB"
+      }
+    }
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/31820/party/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

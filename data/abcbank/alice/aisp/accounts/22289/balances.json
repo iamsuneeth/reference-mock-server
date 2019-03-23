@@ -1,0 +1,32 @@
+{
+  "Data": {
+    "Balance": [
+      {
+        "AccountId": "22289",
+        "Amount": {
+          "Amount": "1230.00",
+          "Currency": "GBP"
+        },
+        "CreditDebitIndicator": "Credit",
+        "Type": "InterimAvailable",
+        "DateTime": "2017-04-05T10:43:07+00:00",
+        "CreditLine": [
+          {
+            "Included": true,
+            "Amount": {
+              "Amount": "1000.00",
+              "Currency": "GBP"
+            },
+            "Type": "Pre-Agreed"
+          }
+        ]
+      }
+    ]
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/accounts/22289/balances/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}

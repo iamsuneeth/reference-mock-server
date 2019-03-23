@@ -1,0 +1,24 @@
+{
+    "Data": {
+      "DirectDebit": [
+        {
+          "AccountId": "22289",
+          "DirectDebitId": "DD03",
+          "MandateIdentification": "Caravanners",
+          "DirectDebitStatusCode": "Active",
+          "Name": "Towbar Club 3 - We Love Towbars",
+          "PreviousPaymentDateTime": "2017-04-05T10:43:07+00:00",
+          "PreviousPaymentAmount": {
+            "Amount": "0.57",
+            "Currency": "GBP"
+          }
+        }
+      ]
+    },
+    "Links": {
+      "Self": "/open-banking/v3.1/aisp/accounts/22289/direct-debits/"
+    },
+    "Meta": {
+      "TotalPages": 1
+    }
+  }

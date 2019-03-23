@@ -1,0 +1,16 @@
+{
+  "Data": {
+    "Party": {
+      "PartyId": "PXSIF023",
+      "PartyType": "Delegate",
+      "Name": "Mr D User",
+      "EmailAddress": "d.user@semiotec.co.jp"
+    }
+  },
+  "Links": {
+    "Self": "/open-banking/v3.1/aisp/party/"
+  },
+  "Meta": {
+    "TotalPages": 1
+  }
+}
